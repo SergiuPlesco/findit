@@ -1,0 +1,18 @@
+{
+	"name": "findit",
+	"version": "1.0.0",
+	"description": "no description",
+	"main": "index.js",
+	"scripts": {
+		"server": "npx nodemon index --prefix server",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run client\" \"npm run server\""
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"concurrently": "^6.2.0",
+		"dotenv": "^10.0.0"
+	}
+}
