@@ -1,0 +1,18 @@
+[
+	{
+		"category": "Magazin alimentar",
+		"companies": ["Jardi", "Linella", "Maximal", "Family market", "Meat House"]
+	},
+	{
+		"category": "Salon de frumusete",
+		"companies": ["Peral", "Casa de Servicii", "Barber Lux"]
+	},
+	{
+		"category": "Salon de tatuaj",
+		"companies": ["Ink Tatoo", "Mega Ink", "Old School Ink"]
+	},
+	{
+		"category": "Servicii generale",
+		"companies": ["Curatenia casei", "Spalarea geamurilor", "Mutarea mobilei"]
+	}
+]
