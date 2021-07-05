@@ -7,6 +7,7 @@ dotenv.config();
 import connectDB from "./config/db.config.js";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
+import companyRouter from "./routes/company.routes.js";
 // Variables
 const PORT = process.env.PORT || 3001;
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(authRouter);
 app.use(userRouter);
+app.use(companyRouter);
 
 app.listen(PORT, (error) => {
 	if (error) {

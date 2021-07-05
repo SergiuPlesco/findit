@@ -2,14 +2,9 @@ import express from "express";
 import userController from "../controllers/user.controller.js";
 const userRouter = express.Router();
 
-userRouter.get("/", (req, res) => {
-	res.json({ message: "hello" });
-});
-
 // User routes
-userRouter.get("/users/:userID");
-
-userRouter.put("/users/:userID");
-userRouter.delete("/users/:userID");
+userRouter.get("/users/:userID", userController.user_account_details);
+userRouter.put("/users/:userID", userController.user_account_update_details);
+userRouter.delete("/users/:userID", userController.user_account_delete);
 
 export default userRouter;
