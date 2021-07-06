@@ -28,12 +28,11 @@ const UserSchema = new Schema({
 		minlength: 6,
 		select: false,
 	},
-	companies: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: "Company",
-		},
-	],
+	company: {
+		type: Schema.Types.ObjectId,
+		ref: "Company",
+	},
+
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
 });

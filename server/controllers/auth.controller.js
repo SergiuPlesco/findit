@@ -86,7 +86,7 @@ const users_resetpassword = async (req, res) => {
 		.createHash("sha256")
 		.update(req.params.resetToken)
 		.digest("hex");
-	console.log("reset pass: ", resetPasswordToken);
+	console.log("Reset pass: ", resetPasswordToken);
 	try {
 		const user = await User.findOne({
 			resetPasswordToken,

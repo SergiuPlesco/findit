@@ -4,7 +4,7 @@ const user_account_details = async (req, res) => {
 	const userID = req.params.userID;
 	try {
 		const user = await User.findOne({ _id: userID });
-		if (!user) return req.status(404).json({ success: false, error: "User not found with." });
+		if (!user) return res.status(404).json({ success: false, error: "User not found with." });
 		return res.status(200).json({ success: true, user });
 	} catch (error) {
 		return res.status(500).json({ success: false, error: error.message });

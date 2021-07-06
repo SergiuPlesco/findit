@@ -1,10 +1,9 @@
 import express from "express";
 const companyRouter = express.Router();
+import companyController from "../controllers/company.controller.js";
 
-companyRouter.get("/companies/:companyID");
-companyRouter.get("/companies/all");
-companyRouter.post("/companies/add");
-companyRouter.put("/companies/:companyID");
-companyRouter.delete("companies/:companyID");
+companyRouter.post("/users/:userID/company", companyController.company_register);
+companyRouter.put("/users/:userID/company", companyController.company_update_details);
+companyRouter.delete("/users/:userID/company", companyController.company_delete);
 
 export default companyRouter;
