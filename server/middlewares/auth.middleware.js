@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
 const authorize = async (req, res, next) => {
+	const userID = req.params.userID;
 	let token;
 	if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
 		token = req.headers.authorization.split(" ")[1];
@@ -13,6 +14,11 @@ const authorize = async (req, res, next) => {
 	}
 	try {
 		const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
+		console.log(verifiedToken);
+		if (userID !== verifiedToken.id)
+			return res
+				.status(401)
+				.json({ success: false, error: "Not authorized. Different ID. Login or Register." });
 
 		const user = await User.findOne({ _id: verifiedToken.id });
 		if (!user)
