@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import getUserCoordinates from "../utils/getUserCoordinates";
-import userLocation from "../utils/userLocation";
+import getUserCoordinates from "../../../utils/getUserCoordinates";
+import userLocation from "../../../utils/userLocation";
 import "bootstrap/js/dist/modal";
 import "./LocationModal.css";
 

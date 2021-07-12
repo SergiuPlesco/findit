@@ -1,0 +1,11 @@
+.container-form {
+	margin-top: 4rem;
+}
+
+.container-form .form {
+	width: 300px;
+	margin: auto;
+	padding: 1rem;
+	border: 1px solid #aaa;
+	/* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); */
+}

@@ -4,13 +4,17 @@ dotenv.config();
 const dbURL = process.env.dbURL;
 
 const connectDB = async () => {
-	await mongoose.connect(dbURL, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true,
-		useFindAndModify: false,
-	});
-	console.log("Connected to DB FindIt");
+	try {
+		await mongoose.connect(dbURL, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useCreateIndex: true,
+			useFindAndModify: false,
+		});
+		console.log("Connected to DB FindIt");
+	} catch (error) {
+		console.log(`ERROR conntecting to DB: ${error}`);
+	}
 };
 
 export default connectDB;

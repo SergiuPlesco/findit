@@ -1,3 +1,5 @@
 .location-modal-component {
 	cursor: pointer;
+	width: 100px;
+	justify-content: center;
 }

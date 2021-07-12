@@ -1,5 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@400;700&display=swap");
+
+:root {
+	--link-color: rgb(242, 84, 91);
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+	font-family: "Open Sans", sans-serif;
+}
+p,
+a {
+	font-family: "Lato", sans-serif;
+}
+
+a:link,
+a:visited {
+	color: var(--link-color);
+}
+
+/* a:visited {
+	color: rgb(92, 67, 0);
+} */
+a:active,
+a:hover {
+	color: var(--link-color);
 }
