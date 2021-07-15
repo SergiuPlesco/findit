@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import data from "../data.json";
+import "./SearchBar.css";
 
 const SearchBar = () => {
 	const [searchValue, setSearchValue] = useState("");
@@ -61,53 +62,55 @@ const SearchBar = () => {
 	}, [searchValue]);
 	// show results for search for user city
 	return (
-		<>
+		<div className="search-container">
 			<form>
-				<div className="input-group">
+				<div className="search-container_input-container">
 					<input
 						type="text"
-						className="form-control"
-						placeholder="Search business"
+						className="search-container_input"
+						placeholder="Search business or category"
 						aria-label="Search"
 						value={searchValue}
 						onChange={handleSearchInput}
 					/>
 
-					<button
-						type="submit"
-						className="btn btn-outline-secondary bg-primary text-white"
-						aria-label="Go"
-					>
+					<button type="submit" className="search-container_button" aria-label="Go">
 						<i className="bi bi-search"></i>
 					</button>
 				</div>
 			</form>
 			{suggestions && (
-				<div className="search-results__container border">
+				<div className="search-results_container">
 					{suggestions.companies.length > 0 && (
-						<div className="">
-							<p className="search-results__title bg-secondary p-2 mb-1 text-white">Brands:</p>
+						<div className="search-results">
+							<p className="search-results_title">Brands:</p>
 							{suggestions.companies.map((company) => {
-								return <p className="p-2 fw-bold m-1">{company}</p>;
+								return (
+									<a tabIndex="0" className="search-results_text">
+										{company}
+									</a>
+								);
 							})}
 						</div>
 					)}
 					{suggestions.categories.length > 0 && (
-						<div>
-							<p className="search-results__title bg-secondary p-2 mb-1 text-white">Categories:</p>
+						<div className="search-results">
+							<p className="search-results_title">Categories:</p>
 							{suggestions.categories.map((category) => (
-								<p className="p-2 fw-bold m-1">{category}</p>
+								<a tabIndex="0" className="search-results_text">
+									{category}
+								</a>
 							))}
 						</div>
 					)}
 					{suggestions.companies.length === 0 && suggestions.categories.length === 0 && (
-						<div className="">
-							<p className="p-2 fw-bold m-1">No results, try another search.</p>
+						<div className="search-results">
+							<p className="search-results_text">No results, try another search.</p>
 						</div>
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

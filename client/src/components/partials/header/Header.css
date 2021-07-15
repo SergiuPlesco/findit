@@ -1,7 +1,14 @@
 .header-container {
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+.header-menu-container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 1rem;
-	margin-top: 1rem;
+}
+
+.header-search-location-container {
 }

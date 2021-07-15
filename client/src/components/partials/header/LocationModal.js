@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import getUserCoordinates from "../../../utils/getUserCoordinates";
 import userLocation from "../../../utils/userLocation";
-import "bootstrap/js/dist/modal";
+
 import "./LocationModal.css";
 
 const LocationModal = () => {
 	let city = localStorage.getItem("city") ?? "Choose city";
 	const [location, setLocation] = useState(city);
 	const [userInput, setUserInput] = useState("");
+	const [showLocationDialog, setShowLocationDialog] = useState(false);
 
 	useEffect(() => {
 		if (!localStorage.getItem("city")) {
@@ -28,7 +29,12 @@ const LocationModal = () => {
 					console.log(error);
 				});
 		}
-	}, [location]);
+
+		window.addEventListener("keyup", handleLocationDialogKeyboard);
+		return () => {
+			window.removeEventListener("keyup", handleLocationDialogKeyboard);
+		};
+	}, [location, userInput]);
 
 	const changeLocation = (e) => {
 		setUserInput(e.target.value);
@@ -38,82 +44,116 @@ const LocationModal = () => {
 		setUserInput("");
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setLocation(userInput);
-		localStorage.setItem("city", userInput);
+	const toggleLocationDialog = (e) => {
+		if (!showLocationDialog) {
+			openLocationDialog();
+		} else {
+			closeLocationDialog();
+		}
+	};
+
+	const openLocationDialog = () => {
+		setShowLocationDialog(true);
+	};
+
+	const closeLocationDialog = () => {
+		setShowLocationDialog(false);
 		resetInput();
 	};
 
+	const handleLocationDialogKeyboard = (e) => {
+		if (e.keyCode === 27) {
+			closeLocationDialog();
+		}
+		if (e.keyCode === 13) {
+			setLocation(userInput);
+			localStorage.setItem("city", userInput);
+			closeLocationDialog();
+		}
+	};
+
+	const saveLocationChanges = (e) => {
+		e.preventDefault();
+		setLocation(userInput);
+		localStorage.setItem("city", userInput);
+		closeLocationDialog();
+	};
+
 	return (
-		<>
-			<div
-				className="location-modal-component d-flex align-items-center flex-column"
-				data-bs-toggle="modal"
-				data-bs-target="#changeLocationModal"
-			>
-				<div>
+		<div className="location-container">
+			<div className="location-header">
+				<div className="change-header-small-text">
+					<p>Change city</p>
+				</div>
+				<div className="location-header-city-name" onClick={toggleLocationDialog} tabIndex="0">
 					<i className="bi bi-geo-alt-fill"></i>
 
-					{location}
-				</div>
-
-				<div>
-					<p className="small muted mb-0">Change city</p>
+					<p>{location}</p>
+					<i className="bi bi-chevron-down"></i>
 				</div>
 			</div>
-
 			<div
-				className="modal fade"
-				id="changeLocationModal"
-				tabIndex="-1"
-				aria-labelledby="change-location"
-				aria-hidden="true"
-			>
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="change-location">
-								Change location
-							</h5>
-							<button
-								type="button"
-								className="btn-close"
-								data-bs-dismiss="modal"
-								aria-label="Close"
-								onClick={resetInput}
-							></button>
-						</div>
-						<div className="modal-body">
-							<input
-								className="form-control"
-								type="text"
-								value={userInput}
-								onChange={changeLocation}
-							/>
-						</div>
-						<div className="modal-footer">
-							<button
-								type="button"
-								className="btn btn-secondary"
-								data-bs-dismiss="modal"
-								onClick={resetInput}
-							>
-								Close
-							</button>
-							<button
-								type="button"
-								className="btn btn-primary"
-								data-bs-dismiss="modal"
-								onClick={handleSubmit}
-							>
-								Save changes
-							</button>
+				className={`location-modal-backdrop ${showLocationDialog ? "active" : ""}`}
+				onClick={closeLocationDialog}
+			></div>
+			{showLocationDialog && (
+				<div
+					className="location-body"
+					id="changeLocationModal"
+					tabIndex="0"
+					aria-labelledby="change-location"
+					aria-hidden="true"
+				>
+					<div className="location-body-dialog">
+						<div className="location-body-content">
+							<div className="location-body-header">
+								<p className="location-body-title" id="change-location">
+									Change location
+								</p>
+								<button
+									type="button"
+									className="btn-close"
+									aria-label="Close Location Dialog"
+									onClick={closeLocationDialog}
+								>
+									<i className="bi bi-x-lg"></i>
+								</button>
+							</div>
+							<div className="location-body-form">
+								<button type="button" className="" onClick={resetInput}>
+									<i className="bi bi-x"></i>
+								</button>
+								<input
+									className="form-input"
+									type="text"
+									value={userInput}
+									onChange={changeLocation}
+									placeholder="Ex. Rezina"
+								/>
+							</div>
+							<div className="location-body-footer">
+								<button
+									type="button"
+									className="location-btn"
+									data-bs-dismiss="modal"
+									onClick={closeLocationDialog}
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									className="location-btn"
+									data-bs-dismiss="modal"
+									onClick={saveLocationChanges}
+								>
+									Save changes
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</>
+			)}
+		</div>
 	);
 };
 

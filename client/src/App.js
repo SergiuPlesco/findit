@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Components
 import Header from "./components/partials/header/Header";
-import SearchBar from "./components/SearchBar";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
 import ForgotPassword from "./components/login/ForgotPassword";
@@ -15,7 +14,6 @@ function App() {
 		<Router>
 			<div className="container">
 				<Header />
-				{/* <SearchBar /> */}
 
 				<Switch>
 					<Route exact path="/">

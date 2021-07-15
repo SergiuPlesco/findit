@@ -1,25 +1,19 @@
 import styled from "styled-components";
 
-const LINK_COLOR = "rgb(242, 84, 91)";
+const MAIN_COLOR = "rgb(242, 84, 91)";
 
 const Button = styled.button`
 	display: block;
 	color: #fff;
 	font-size: 1rem;
 	border: none;
-	background-color: brown;
+	background-color: ${MAIN_COLOR};
 	line-height: normal;
 	height: 40px;
 	width: 40px;
 	@media (min-width: 769px) {
 		display: none;
 	}
-`;
-
-const Title = styled.h1`
-	color: palevioletred;
-	font-size: 1.5rem;
-	margin: 0.5rem;
 `;
 
 const Backdrop = styled.div.attrs((props) => ({
@@ -32,12 +26,12 @@ const Backdrop = styled.div.attrs((props) => ({
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 1;
+	z-index: 10;
 	background-color: rgba(0, 0, 0, 0.6);
-	backdrop-filter: blur(4px);
+	backdrop-filter: blur(5px);
 	visibility: ${(props) => (props.menustate ? "visible" : "hidden")};
 	opacity: ${(props) => (props.menustate ? "1" : "0")};
-	transition: all 0.2s ease;
+	transition: all 0.2s ease-in;
 	@media (min-width: 769px) {
 		visibility: hidden;
 	}
@@ -49,9 +43,9 @@ const MenuContainer = styled.div`
 	left: ${(props) => (props.menustate ? "0" : "-100%")};
 	width: 75%;
 	height: 100%;
-	z-index: 2;
+	z-index: 11;
 	background-color: #fff;
-	transition: left 0.4s ease;
+	transition: left 0.4s ease-in;
 	@media (min-width: 769px) {
 		display: block;
 		position: static;
@@ -63,14 +57,14 @@ const UL = styled.ul`
 	top: 3rem;
 	padding: 1rem;
 	left: ${(props) => (props.menustate ? "0" : "-100%")};
-	transition: left 0.2s ease;
+	transition: left 0.2s ease-in;
 
 	.menu-item {
 		margin-bottom: 1rem;
 
 		.menu-link {
 			text-decoration: none;
-			font-weight: bold;
+
 			padding: 0.5rem;
 			font-size: 1.2rem;
 		}
@@ -86,13 +80,13 @@ const UL = styled.ul`
 			margin-bottom: 0;
 
 			.menu-link {
-				border: 2px solid transparent;
+				border: 1px solid transparent;
 				&:hover {
-					border: 2px solid ${LINK_COLOR};
+					border: 1px solid ${MAIN_COLOR};
 				}
 			}
 		}
 	}
 `;
 
-export { Button, Title, Backdrop, MenuContainer, UL };
+export { Button, Backdrop, MenuContainer, UL };

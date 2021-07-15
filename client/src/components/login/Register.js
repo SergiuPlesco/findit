@@ -30,8 +30,8 @@ const Register = () => {
 					<label htmlFor="password" className="form-label">
 						Password:
 					</label>
-					<input id="password" type="text" className="form-control" placeholder="Password" />
-					<label htmlFor="password" className="form-label">
+					<input id="confirmpassword" type="text" className="form-control" placeholder="Password" />
+					<label htmlFor="confirmpassword" className="form-label">
 						Confirm Password:
 					</label>
 					<input
