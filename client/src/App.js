@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 //Components
 import Header from "./components/partials/header/Header";
@@ -6,10 +8,21 @@ import Login from "./components/login/Login";
 import Register from "./components/login/Register";
 import ForgotPassword from "./components/login/ForgotPassword";
 import ResetPasswpord from "./components/login/ResetPassword";
+import CompanyDetails from "./components/CompanyDetails";
 import Home from "./components/pages/Home";
 import PageNotFound from "./components/pages/PageNotFound";
+import { getBrandsAndCatByCity } from "./redux/services/PublicServices";
+import Categories from "./components/Categories";
 
 function App() {
+	const dispatch = useDispatch();
+	const city = localStorage.getItem("city");
+	useEffect(() => {
+		if (city) {
+			dispatch(getBrandsAndCatByCity(city));
+		}
+	}, [city]);
+
 	return (
 		<Router>
 			<div className="container">
@@ -30,6 +43,12 @@ function App() {
 					</Route>
 					<Route exact path="/users/resetpassword/:resetToken">
 						<ResetPasswpord />
+					</Route>
+					<Route exact path="/:city/brand/:brand">
+						<CompanyDetails />
+					</Route>
+					<Route exact path="/:city/category/:category">
+						<Categories />
 					</Route>
 					<Route path="*">
 						<PageNotFound />

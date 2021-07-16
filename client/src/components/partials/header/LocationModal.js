@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import getUserCoordinates from "../../../utils/getUserCoordinates";
 import userLocation from "../../../utils/userLocation";
+import { useDispatch } from "react-redux";
+import { getBrandsAndCatByCity } from "../../../redux/services/PublicServices";
 
 import "./LocationModal.css";
 
@@ -9,32 +11,7 @@ const LocationModal = () => {
 	const [location, setLocation] = useState(city);
 	const [userInput, setUserInput] = useState("");
 	const [showLocationDialog, setShowLocationDialog] = useState(false);
-
-	useEffect(() => {
-		if (!localStorage.getItem("city")) {
-			getUserCoordinates()
-				.then((position) => {
-					const lat = position.coords.latitude;
-					const lon = position.coords.longitude;
-
-					userLocation(lat, lon)
-						.then((data) => {
-							setLocation(data);
-						})
-						.catch((error) => {
-							console.log(error);
-						});
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		}
-
-		window.addEventListener("keyup", handleLocationDialogKeyboard);
-		return () => {
-			window.removeEventListener("keyup", handleLocationDialogKeyboard);
-		};
-	}, [location, userInput]);
+	const dispatch = useDispatch();
 
 	const changeLocation = (e) => {
 		setUserInput(e.target.value);
@@ -74,10 +51,40 @@ const LocationModal = () => {
 
 	const saveLocationChanges = (e) => {
 		e.preventDefault();
-		setLocation(userInput);
-		localStorage.setItem("city", userInput);
+		if (userInput) {
+			setLocation(userInput);
+			localStorage.setItem("city", userInput);
+			dispatch(getBrandsAndCatByCity(userInput));
+			closeLocationDialog();
+			return;
+		}
 		closeLocationDialog();
 	};
+	useEffect(() => {
+		if (!localStorage.getItem("city")) {
+			getUserCoordinates()
+				.then((position) => {
+					const lat = position.coords.latitude;
+					const lon = position.coords.longitude;
+
+					userLocation(lat, lon)
+						.then((data) => {
+							setLocation(data);
+						})
+						.catch((error) => {
+							console.log(error);
+						});
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+
+		document.addEventListener("keyup", handleLocationDialogKeyboard);
+		return () => {
+			document.removeEventListener("keyup", handleLocationDialogKeyboard);
+		};
+	}, [location, userInput]);
 
 	return (
 		<div className="location-container">
@@ -120,7 +127,7 @@ const LocationModal = () => {
 								</button>
 							</div>
 							<div className="location-body-form">
-								<button type="button" className="" onClick={resetInput}>
+								<button type="button" className="reset-input-btn" onClick={resetInput}>
 									<i className="bi bi-x"></i>
 								</button>
 								<input
@@ -144,7 +151,9 @@ const LocationModal = () => {
 									type="button"
 									className="location-btn"
 									data-bs-dismiss="modal"
-									onClick={saveLocationChanges}
+									onClick={(e) => {
+										saveLocationChanges(e);
+									}}
 								>
 									Save changes
 								</button>

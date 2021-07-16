@@ -6,7 +6,13 @@ const getCityBrandsAndCategories = async (req, res) => {
 
 	try {
 		const companies = await Company.find(filters);
-		const brands = companies.map((company) => company.name);
+		const brands = companies.map((company) => {
+			return {
+				id: company._id,
+				name: company.name,
+				category: company.category,
+			};
+		});
 		const categories = companies.map((company) => company.category);
 
 		return res.status(200).json({ city, brands, categories });

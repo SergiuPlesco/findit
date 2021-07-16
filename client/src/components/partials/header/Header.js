@@ -7,7 +7,7 @@ import "./Header.css";
 
 const Header = () => {
 	return (
-		<div className="header-container">
+		<header className="header-container">
 			<div className="header-menu-container">
 				<Logo />
 				<HeaderMenu />
@@ -16,7 +16,7 @@ const Header = () => {
 				<LocationModal />
 				<SearchBar />
 			</div>
-		</div>
+		</header>
 	);
 };
 

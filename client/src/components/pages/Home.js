@@ -1,7 +1,11 @@
-import React from "react";
+import Content from "../partials/content/Content";
 
 const Home = () => {
-	return <div>Home</div>;
+	return (
+		<div>
+			<Content />
+		</div>
+	);
 };
 
 export default Home;
