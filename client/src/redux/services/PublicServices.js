@@ -24,4 +24,17 @@ const getCompany = createAsyncThunk(
 		}
 	}
 );
-export { getBrandsAndCatByCity, getCompany };
+
+const getCompaniesByCategory = createAsyncThunk(
+	"companiesByCategory/status",
+	async ({ city, category }, { rejectWithValue }) => {
+		try {
+			const result = await axios.get(`/${city}/category/${category}`);
+			return result.data;
+		} catch ({ error }) {
+			console.log(error);
+			return rejectWithValue(error.response.data.error);
+		}
+	}
+);
+export { getBrandsAndCatByCity, getCompany, getCompaniesByCategory };

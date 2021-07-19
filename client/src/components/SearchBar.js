@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import data from "../data.json";
+import { useSelector } from "react-redux";
+// import data from "../data.json";
 import "./SearchBar.css";
+import { city, error, isLoading } from "../redux/slices/CitySlice";
 
 const SearchBar = () => {
 	const [searchValue, setSearchValue] = useState("");
 	const [suggestions, setSuggetions] = useState(null);
+	const currentCity = useSelector(city);
 
 	const handleSearchInput = (e) => {
 		setSearchValue(e.target.value);
@@ -16,41 +19,34 @@ const SearchBar = () => {
 		const inputLength = inputValue.length;
 		const companiesName = [];
 
-		const filteredCategories =
-			inputLength === 0
-				? []
-				: data
-						.filter((section) => {
-							// Returns an array of "sections" with categories and companies keys
-							return section.category.toLowerCase().slice(0, inputLength) === inputValue;
-						})
-						.map((section) => {
-							// Returns an array with categories of type string
-							return section.category;
-						});
-
 		const filteredBrands =
 			inputLength === 0
 				? []
-				: data
-						.map((section) => {
-							return section.companies.filter(
-								// filter results
-								(entity) => {
-									return entity.toLowerCase().slice(0, inputLength) === inputValue;
-								}
-							);
-						})
-						.filter((entity) => entity.length > 0)
-						.map((entity) => {
-							return entity.forEach((el) => companiesName.push(el));
-						});
+				: currentCity.brands.filter((entity) => {
+						return entity.name.toLowerCase().slice(0, inputLength) === inputValue;
+				  });
+		// .filter((entity) => entity.length > 0)
+		// .map((entity) => {
+		// 	return entity.forEach((el) => companiesName.push(el));
+		// });
+
+		const filteredCategories =
+			inputLength === 0
+				? []
+				: currentCity.categories.filter((category) => {
+						// Returns an array of "sections" with categories and companies keys
+						return category.toLowerCase().slice(0, inputLength) === inputValue;
+				  });
+		// .map((section) => {
+		// 	// Returns an array with categories of type string
+		// 	return section.category;
+		// });
 
 		console.log(filteredCategories);
-		console.log(companiesName);
+		console.log(filteredBrands);
 		setSuggetions({
 			categories: filteredCategories,
-			companies: companiesName,
+			companies: filteredBrands,
 		});
 	};
 
@@ -81,7 +77,9 @@ const SearchBar = () => {
 
 	useEffect(() => {
 		if (searchValue) {
-			getSuggestions(searchValue);
+			if (currentCity) {
+				getSuggestions(searchValue);
+			}
 		} else if (searchValue === "") {
 			setSuggetions(null);
 		}
@@ -89,7 +87,7 @@ const SearchBar = () => {
 		return () => {
 			document.removeEventListener("keyup", handleSuggestionsWindowKeyboard);
 		};
-	}, [searchValue]);
+	}, [searchValue, currentCity]);
 	// show results for search for user city
 	return (
 		<div className="search-container">
@@ -135,11 +133,11 @@ const SearchBar = () => {
 											className=""
 										>
 											<Link
-												to={`/${localStorage.getItem("city")}/brand/${company}`}
+												to={`/${currentCity.city}/brand/${company.name}`}
 												tabIndex="0"
 												className="search-results_text"
 											>
-												{company}
+												{company.name}
 											</Link>
 										</div>
 									);

@@ -12,7 +12,7 @@ import CompanyDetails from "./components/CompanyDetails";
 import Home from "./components/pages/Home";
 import PageNotFound from "./components/pages/PageNotFound";
 import { getBrandsAndCatByCity } from "./redux/services/PublicServices";
-import Categories from "./components/Categories";
+import CompaniesByCategory from "./components/CompaniesByCategory";
 
 function App() {
 	const dispatch = useDispatch();
@@ -48,7 +48,7 @@ function App() {
 						<CompanyDetails />
 					</Route>
 					<Route exact path="/:city/category/:category">
-						<Categories />
+						<CompaniesByCategory />
 					</Route>
 					<Route path="*">
 						<PageNotFound />

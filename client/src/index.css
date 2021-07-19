@@ -2,12 +2,14 @@
 
 :root {
 	--link-color: rgb(242, 84, 91);
+	--text-color: rgb(34, 56, 67);
 }
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	color: var(--text-color);
 }
 
 ul,
