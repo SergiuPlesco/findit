@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@400;700&display=swap");
 
 :root {
-	--link-color: rgb(242, 84, 91);
-	--text-color: rgb(34, 56, 67);
+	--link-color: #c64f24;
+	--text-color: #000;
 }
 
 * {
@@ -11,7 +11,12 @@
 	box-sizing: border-box;
 	color: var(--text-color);
 }
-
+*:focus {
+	color: #212529;
+	border-color: #86b7fe;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
 ul,
 ol {
 	margin: 0;
@@ -36,8 +41,13 @@ h5 {
 	font-family: "Open Sans", sans-serif;
 }
 p,
-a {
+a,
+form {
 	font-family: "Lato", sans-serif;
+}
+
+a {
+	display: block;
 }
 
 a:link,

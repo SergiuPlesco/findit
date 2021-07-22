@@ -1,11 +1,46 @@
-.container-form {
+:root {
+	--background-color: rgb(215, 122, 97);
+}
+.form-container {
 	margin-top: 4rem;
 }
 
-.container-form .form {
-	width: 300px;
+.form-container .form {
+	width: 500px;
 	margin: auto;
-	padding: 1rem;
+	padding: 3rem;
 	border: 1px solid #aaa;
-	/* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); */
+	box-shadow: 0px 1px 16px 1px rgba(0, 0, 0, 0.1);
+	/* background-color: var(--background-color); */
+}
+
+.form-label {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.form-control {
+	width: 100%;
+	display: block;
+	padding: 0.5rem;
+	margin-bottom: 1rem;
+	appearance: none;
+	font-size: 1rem;
+	color: #212529;
+	border: 1px solid #ced4da;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-button {
+	border: none;
+	background-color: coral;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem 0;
+	color: #000;
+	font-size: 1rem;
+}
+
+.form-link {
+	/* margin: 0.5rem 0 0; */
+	padding: 0.5rem 0;
 }
