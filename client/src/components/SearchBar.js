@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import data from "../data.json";
 import "./SearchBar.css";
-import { city, error, isLoading } from "../redux/slices/CitySlice";
+import { city } from "../redux/slices/CitySlice";
 
 const SearchBar = () => {
 	const [searchValue, setSearchValue] = useState("");
@@ -17,7 +17,7 @@ const SearchBar = () => {
 	const getSuggestions = (value) => {
 		const inputValue = value.trim().toLowerCase();
 		const inputLength = inputValue.length;
-		const companiesName = [];
+		// const companiesName = [];
 
 		const filteredBrands =
 			inputLength === 0

@@ -15,7 +15,7 @@ const CompanyDetails = () => {
 		if (city && brand) {
 			dispatch(getCompany({ city, brand }));
 		}
-	}, [city, brand]);
+	}, [city, brand, dispatch]);
 
 	const companySelected = useSelector(company);
 	const errorSelected = useSelector(error);

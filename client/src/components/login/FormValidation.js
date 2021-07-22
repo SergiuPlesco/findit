@@ -10,7 +10,7 @@ const registerForm = Joi.object({
 	repeat_password: Joi.ref("password"),
 }).with("password", "repeat_password");
 
-const options = {
+const customValidationErrorMessages = {
 	messages: {
 		"string.empty": "Field not allowed to be empty",
 		"string.email": "Not a valid email",
@@ -21,7 +21,7 @@ const options = {
 
 const isRegistrationValid = (user) => {
 	try {
-		const verifiedUser = registerForm.validate(user, options);
+		const verifiedUser = registerForm.validate(user, customValidationErrorMessages);
 
 		console.log("registration: ", verifiedUser);
 		return verifiedUser;
@@ -31,4 +31,20 @@ const isRegistrationValid = (user) => {
 	}
 };
 
-export { isRegistrationValid };
+const loginForm = Joi.object({
+	email: Joi.string()
+		.email({ tlds: { allow: false } })
+		.required(),
+	password: Joi.string().min(6).required(),
+});
+
+const isLoggingValid = (user) => {
+	try {
+		const verifiedUser = loginForm.validate(user, customValidationErrorMessages);
+		return verifiedUser;
+	} catch (error) {
+		return error;
+	}
+};
+
+export { isRegistrationValid, isLoggingValid };

@@ -16,7 +16,7 @@ const Content = () => {
 		} else if (errorCity) {
 			setCurrentCityError(errorCity);
 		}
-	}, [selectedCity]);
+	}, [selectedCity, errorCity]);
 
 	return (
 		<div>

@@ -27,7 +27,8 @@ const Register = () => {
 
 	const submitForm = (e) => {
 		e.preventDefault();
-		const { error, value } = isRegistrationValid(user);
+		// destructure error and/or value
+		const { error } = isRegistrationValid(user);
 
 		if (error) {
 			setValidationError(error.toString().replace("ValidationError: ", ""));

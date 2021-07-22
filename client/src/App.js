@@ -21,7 +21,7 @@ function App() {
 		if (city) {
 			dispatch(getBrandsAndCatByCity(city));
 		}
-	}, [city]);
+	}, [city, dispatch]);
 
 	return (
 		<Router>
