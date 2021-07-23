@@ -50,6 +50,7 @@ function App() {
 					<Route exact path="/:city/category/:category">
 						<CompaniesByCategory />
 					</Route>
+					<Route exact path="/users/:userID/company"></Route>
 					<Route path="*">
 						<PageNotFound />
 					</Route>

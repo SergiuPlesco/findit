@@ -54,7 +54,7 @@ const users_forgotpassword = async (req, res) => {
 		}
 		const resetToken = user.getResetPasswordToken();
 		await user.save();
-		const resetUrl = `http://localhost:3001/users/resetpassword/${resetToken}`;
+		const resetUrl = `http://localhost:3000/users/resetpassword/${resetToken}`;
 		const message = `
 			<h1>You have requested a password reset</h1>
 			<p>Please follow the link below:</p>
@@ -95,7 +95,7 @@ const users_resetpassword = async (req, res) => {
 		if (!user) {
 			return res.status(401).json({ success: false, error: "Invalid or expired reset token" });
 		}
-		user.password = req.body.password;
+		user.password = req.body.new_password;
 		user.resetPasswordToken = undefined;
 		user.resetPasswordExpire = undefined;
 		await user.save();

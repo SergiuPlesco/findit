@@ -19,4 +19,16 @@ const LoginUser = createAsyncThunk("auth/login", async (user, { rejectWithValue 
 	}
 });
 
-export { RegisterUser, LoginUser };
+const ForgotPasswordUser = createAsyncThunk(
+	"auth/forgotpassword",
+	async (email, { rejectWithValue }) => {
+		try {
+			const result = await axios.post("/users/forgotpassword", email);
+			return result.data;
+		} catch (error) {
+			return rejectWithValue(error.response.data.error);
+		}
+	}
+);
+
+export { RegisterUser, LoginUser, ForgotPasswordUser };

@@ -58,7 +58,7 @@ const HeaderMenu = () => {
 									console.log("dispatched");
 								}}
 							>
-								<Link className="menu-link" to="/">
+								<Link className="menu-link" to="/users/login">
 									Log out
 								</Link>
 							</li>

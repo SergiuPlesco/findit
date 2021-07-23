@@ -1,5 +1,15 @@
 import Joi from "joi";
 
+const customValidationErrorMessages = {
+	messages: {
+		"string.empty": "Field not allowed to be empty",
+		"string.email": "Not a valid email",
+		"string.min": "Password length must be at least 6 characters long",
+		"any.only": "Passwords should match",
+	},
+};
+
+// Registration Form
 const registerForm = Joi.object({
 	firstname: Joi.string().required(),
 	lastname: Joi.string().required(),
@@ -9,15 +19,6 @@ const registerForm = Joi.object({
 	password: Joi.string().min(6).required(),
 	repeat_password: Joi.ref("password"),
 }).with("password", "repeat_password");
-
-const customValidationErrorMessages = {
-	messages: {
-		"string.empty": "Field not allowed to be empty",
-		"string.email": "Not a valid email",
-		"string.min": "Password length must be at least 6 characters long",
-		"any.only": "Passwords should match",
-	},
-};
 
 const isRegistrationValid = (user) => {
 	try {
@@ -31,6 +32,7 @@ const isRegistrationValid = (user) => {
 	}
 };
 
+// Login Form
 const loginForm = Joi.object({
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
@@ -47,4 +49,33 @@ const isLoggingValid = (user) => {
 	}
 };
 
-export { isRegistrationValid, isLoggingValid };
+// Forgot Password Form
+const forgotPasswordForm = Joi.object({
+	email: Joi.string()
+		.email({ tlds: { allow: false } })
+		.required(),
+});
+
+const isEmailValid = (userEmail) => {
+	try {
+		const verifiedEmail = forgotPasswordForm.validate(userEmail, customValidationErrorMessages);
+		return verifiedEmail;
+	} catch (error) {
+		return error;
+	}
+};
+
+// Reset Password Form
+const resetPasswordForm = Joi.object({
+	new_password: Joi.string().min(6).required(),
+	repeat_new_password: Joi.ref("new_password"),
+});
+const isNewPasswordValid = (newPassword) => {
+	try {
+		const verifiedPassword = resetPasswordForm.validate(newPassword, customValidationErrorMessages);
+		return verifiedPassword;
+	} catch (error) {
+		return error;
+	}
+};
+export { isRegistrationValid, isLoggingValid, isEmailValid, isNewPasswordValid };
