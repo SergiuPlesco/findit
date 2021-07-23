@@ -35,6 +35,7 @@ const Login = () => {
 		}
 		dispatch(LoginUser(userToLog))
 			.then((result) => {
+				console.log(result);
 				if (result.error) {
 					throw Error(result.payload.toString());
 				}
@@ -45,7 +46,7 @@ const Login = () => {
 
 				localStorage.setItem("authToken", token);
 				localStorage.setItem("isUserLoggedIn", "loggedIn");
-				history.push("/");
+				history.push(`/users/${result.payload.id}/company`);
 			})
 			.catch((error) => {
 				setLoggingError(error.message);

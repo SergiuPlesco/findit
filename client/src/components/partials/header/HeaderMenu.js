@@ -55,7 +55,9 @@ const HeaderMenu = () => {
 								className="menu-item"
 								onClick={() => {
 									dispatch(logout());
-									console.log("dispatched");
+									console.log("logout dispatched");
+									localStorage.removeItem("authToken");
+									localStorage.removeItem("isUserLoggedIn");
 								}}
 							>
 								<Link className="menu-link" to="/users/login">
