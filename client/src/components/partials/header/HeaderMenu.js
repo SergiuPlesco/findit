@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userStatus, logout } from "../../../redux/slices/AuthSlice";
+import { userStatus, logout, userId } from "../../../redux/slices/AuthSlice";
+import { logUserOut } from "../../../redux/slices/UserProfileSlice";
 import { Button, Backdrop, MenuContainer, UL } from "./styles";
 
 const HeaderMenu = () => {
@@ -10,6 +11,7 @@ const HeaderMenu = () => {
 	// const tokenExists = localStorage.getItem("authToken");
 	// const userExists = localStorage.getItem("isUserLoggedIn");
 	const isUserLoggedIn = useSelector(userStatus);
+	const id = useSelector(userId);
 	const dispatch = useDispatch();
 	const handleMenuState = () => {
 		setMenuState(!menustate);
@@ -23,7 +25,7 @@ const HeaderMenu = () => {
 		if (isUserLoggedIn) {
 			setUserLoggedIn(true);
 		}
-	}, [userLoggedIn, dispatch]);
+	}, [userLoggedIn, dispatch, isUserLoggedIn]);
 	return (
 		<nav className="header-nav">
 			<Button className="menu-toggler" onClick={handleMenuState}>
@@ -51,10 +53,16 @@ const HeaderMenu = () => {
 						</>
 					) : (
 						<>
+							<li className="menu-item">
+								<Link className="menu-link" to={id ? `/users/${id}` : `/users/login`}>
+									Dashboard
+								</Link>
+							</li>
 							<li
 								className="menu-item"
 								onClick={() => {
 									dispatch(logout());
+									dispatch(logUserOut());
 									console.log("logout dispatched");
 									localStorage.removeItem("authToken");
 									localStorage.removeItem("isUserLoggedIn");

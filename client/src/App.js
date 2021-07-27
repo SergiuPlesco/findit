@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 //Components
@@ -15,11 +15,9 @@ import { getBrandsAndCatByCity } from "./redux/services/PublicServices";
 import CompaniesByCategory from "./components/CompaniesByCategory";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import { userStatus } from "./redux/slices/AuthSlice";
 
 function App() {
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector(userStatus);
 	const city = localStorage.getItem("city");
 	useEffect(() => {
 		if (city) {
@@ -54,7 +52,7 @@ function App() {
 					<Route exact path="/:city/category/:category">
 						<CompaniesByCategory />
 					</Route>
-					<PrivateRoute exact path="/users/:userID/company">
+					<PrivateRoute exact path="/users/:userID/">
 						<Dashboard />
 					</PrivateRoute>
 

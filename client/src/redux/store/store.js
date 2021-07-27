@@ -5,12 +5,14 @@ import authReducer from "../slices/AuthSlice";
 import cityReducer from "../slices/CitySlice";
 import companyReducer from "../slices/CompanySlice";
 import companiesByCategoryReducer from "../slices/CompaniesByCategorySlice";
+import userProfileReducer from "../slices/UserProfileSlice";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
 	city: cityReducer,
 	company: companyReducer,
 	companiesByCategory: companiesByCategoryReducer,
+	userProfile: userProfileReducer,
 });
 
 const persistConfig = {

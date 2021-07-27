@@ -3,6 +3,20 @@ import User from "../models/user.model.js";
 import dotenv from "dotenv";
 dotenv.config();
 
+const company_details = async (req, res) => {
+	const userID = req.params.userID;
+	try {
+		const user = await User.findOne({ _id: userID });
+		if (!user) return res.status(404).json({ success: false, error: "Could not find the user." });
+		if (user?.company) {
+			const company = await Company.findOne({ _id: user.company });
+			return res.status(200).json({ success: true, company });
+		}
+	} catch (error) {
+		return res.status(500).json({ success: false, error: `${error.message}` });
+	}
+};
+
 const company_register = async (req, res, next) => {
 	const userID = req.params.userID;
 	const user = await User.findOne({ _id: userID });
@@ -14,12 +28,13 @@ const company_register = async (req, res, next) => {
 			success: false,
 			error: `You can have only one company registered`,
 		});
-	const { name, city, address, contact, services, description } = req.body;
+	const { name, city, category, address, contact, services, description } = req.body;
 
 	try {
 		const company = await Company.create({
 			name,
 			city,
+			category,
 			address,
 			contact,
 			services,
@@ -72,6 +87,7 @@ const company_delete = async (req, res) => {
 };
 
 export default {
+	company_details,
 	company_register,
 	company_update_details,
 	company_delete,

@@ -46,7 +46,7 @@ const Login = () => {
 
 				localStorage.setItem("authToken", token);
 				localStorage.setItem("isUserLoggedIn", "loggedIn");
-				history.push(`/users/${result.payload.id}/company`);
+				history.push(`/users/${result.payload.id}`);
 			})
 			.catch((error) => {
 				setLoggingError(error.message);

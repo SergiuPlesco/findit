@@ -1,0 +1,23 @@
+.dashboard-container {
+	padding: 1rem;
+}
+
+.user-container {
+	max-width: 50%;
+	margin: 0 auto 2rem;
+}
+
+.field-container {
+	margin-bottom: 1rem;
+}
+
+.field-container_label {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.field-container_input {
+	padding: 0.5rem;
+	width: 100%;
+	font-size: 1rem;
+}

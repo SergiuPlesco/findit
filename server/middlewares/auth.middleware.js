@@ -14,7 +14,6 @@ const authorize = async (req, res, next) => {
 	}
 	try {
 		const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
-		console.log(verifiedToken);
 		if (userID !== verifiedToken.id)
 			return res
 				.status(401)

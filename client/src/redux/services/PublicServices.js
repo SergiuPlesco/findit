@@ -32,7 +32,6 @@ const getCompaniesByCategory = createAsyncThunk(
 			const result = await axios.get(`/${city}/category/${category}`);
 			return result.data;
 		} catch ({ error }) {
-			console.log(error);
 			return rejectWithValue(error.response.data.error);
 		}
 	}
