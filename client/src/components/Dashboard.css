@@ -1,23 +1,119 @@
 .dashboard-container {
-	padding: 1rem;
+	margin-top: 2rem;
+	padding: 1rem 0;
+}
+
+@media (min-width: 769px) {
+	.dashboard-container {
+		display: grid;
+		grid-template-columns: 48% 48%;
+		column-gap: 4%;
+	}
 }
 
 .user-container {
-	max-width: 50%;
-	margin: 0 auto 2rem;
+	margin-bottom: 3rem;
 }
 
 .field-container {
 	margin-bottom: 1rem;
 }
 
+.dashboard-title {
+	margin-bottom: 1rem;
+}
 .field-container_label {
 	display: block;
 	margin-bottom: 0.5rem;
+	font-weight: bold;
+}
+.upload-controls {
+	display: flex;
+	align-items: center;
+	position: relative;
 }
 
 .field-container_input {
 	padding: 0.5rem;
 	width: 100%;
 	font-size: 1rem;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	margin-bottom: 0.5rem;
+}
+/****************************/
+
+input[type="file"]::-ms-browse {
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 0;
+	background-color: coral;
+	cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 0;
+	background-color: coral;
+	cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 0;
+	background-color: coral;
+	cursor: pointer;
+}
+
+input[type="file"]::-ms-browse:hover {
+	background-color: #ffb07e;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+	background-color: #ffb07e;
+}
+
+input[type="file"]::file-selector-button:hover {
+	background-color: #ffb07e;
+}
+/****************************/
+
+.upload-controls_button {
+	border: none;
+	background-color: rgb(245, 94, 94);
+	color: #000;
+	font-size: 1rem;
+	padding: 0.5rem 1rem;
+	position: absolute;
+	right: 0.5rem;
+	top: 50%;
+	transform: translateY(-65%);
+}
+.button-container .button {
+	padding: 0.5rem 0.8rem;
+	border: none;
+	background-color: coral;
+	font-size: 1rem;
+	margin-right: 0.5rem;
+	cursor: pointer;
+}
+
+.company-container {
+	margin-bottom: 3rem;
+}
+
+.textarea-autosize {
+	font-family: inherit;
+}
+
+.image-preview {
+	width: 100%;
+}
+
+.image-preview_image {
+	display: block;
+	width: 100%;
+	max-height: 300px;
+	object-fit: cover;
 }

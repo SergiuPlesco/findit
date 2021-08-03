@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 //Components
 import Header from "./components/partials/header/Header";
@@ -9,27 +7,18 @@ import Register from "./components/login/Register";
 import ForgotPassword from "./components/login/ForgotPassword";
 import ResetPasswpord from "./components/login/ResetPassword";
 import CompanyDetails from "./components/CompanyDetails";
-import Home from "./components/pages/Home";
 import PageNotFound from "./components/pages/PageNotFound";
-import { getBrandsAndCatByCity } from "./redux/services/PublicServices";
 import CompaniesByCategory from "./components/CompaniesByCategory";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import Footer from "./components/partials/footer/Footer";
+import Home from "./components/pages/Home";
 
 function App() {
-	const dispatch = useDispatch();
-	const city = localStorage.getItem("city");
-	useEffect(() => {
-		if (city) {
-			dispatch(getBrandsAndCatByCity(city));
-		}
-	}, [city, dispatch]);
-
 	return (
 		<Router>
+			<Header />
 			<div className="container">
-				<Header />
-
 				<Switch>
 					<Route exact path="/">
 						<Home />
@@ -61,6 +50,7 @@ function App() {
 					</Route>
 				</Switch>
 			</div>
+			<Footer />
 		</Router>
 	);
 }

@@ -54,7 +54,7 @@
 .location-header-city-name i.bi-chevron-down {
 	font-size: 1.2rem;
 	margin-left: 0.5rem;
-	/* align-self: flex-end; */
+	align-self: flex-end;
 }
 
 .location-body {

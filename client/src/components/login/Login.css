@@ -6,7 +6,7 @@
 }
 
 .form-container .form {
-	width: 500px;
+	max-width: 500px;
 	margin: auto;
 	padding: 3rem;
 	border: 1px solid #aaa;

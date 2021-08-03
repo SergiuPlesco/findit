@@ -1,14 +1,36 @@
 .result-container {
 	background-color: rgba(255, 255, 255);
 	box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-	padding: 1rem;
+
 	margin-bottom: 1rem;
 }
 
 .result-container_link {
 	text-decoration: none;
+	padding: 1rem;
 }
 
+.result-container_link_content {
+	display: grid;
+	grid-template-columns: 4rem auto;
+}
+
+.result-container_link_image-wrapper {
+	padding: 0.3rem;
+	height: 50px;
+	width: 50px;
+	border: 1px solid #999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	object-fit: cover;
+}
+.result-container_link_image {
+	display: block;
+	width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+}
 .result-container_link-category {
 	color: rgb(100, 100, 100);
 	font-size: 0.8rem;

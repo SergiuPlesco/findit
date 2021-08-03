@@ -1,6 +1,6 @@
 .header-container {
-	margin-bottom: 1rem;
-	margin-top: 1rem;
+	/* margin-bottom: 1rem;
+	margin-top: 1rem; */
 }
 
 .header-menu-container {
@@ -11,4 +11,16 @@
 }
 
 .header-search-location-container {
+}
+
+.header-background-image {
+	display: block;
+	background-image: url("../../../assets/findit-cover2.jpg");
+	background-size: cover;
+	background-position: center 45%;
+	background-repeat: no-repeat;
+	height: 500px;
+	width: 100%;
+	padding-top: 1rem;
+	margin-bottom: 4rem;
 }

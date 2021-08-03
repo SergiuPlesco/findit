@@ -3,6 +3,7 @@ import getUserCoordinates from "../../../utils/getUserCoordinates";
 import userLocation from "../../../utils/userLocation";
 import { useDispatch } from "react-redux";
 import { getBrandsAndCatByCity } from "../../../redux/services/PublicServices";
+import Cities from "../../../default_data/Cities";
 
 import "./LocationModal.css";
 
@@ -104,6 +105,25 @@ const LocationModal = () => {
 				onClick={closeLocationDialog}
 			></div>
 			{showLocationDialog && (
+				// <select
+				// 	className="form-input"
+				// 	id="city"
+				// 	type="select"
+				// 	value={userInput}
+				// 	placeholder="Choose city"
+				// 	onChange={changeLocation}
+				// >
+				// 	<option disabled value="">
+				// 		Choose from the list
+				// 	</option>
+				// 	{Cities.map((city) => {
+				// 		return (
+				// 			<option key={city} value={city}>
+				// 				{city}
+				// 			</option>
+				// 		);
+				// 	})}
+				// </select>
 				<div
 					className="location-body"
 					id="changeLocationModal"
@@ -127,16 +147,35 @@ const LocationModal = () => {
 								</button>
 							</div>
 							<div className="location-body-form">
-								<button type="button" className="reset-input-btn" onClick={resetInput}>
+								{/* <button type="button" className="reset-input-btn" onClick={resetInput}>
 									<i className="bi bi-x"></i>
-								</button>
-								<input
+								</button> */}
+								{/* <input
 									className="form-input"
 									type="text"
 									value={userInput}
 									onChange={changeLocation}
 									placeholder="Ex. Rezina"
-								/>
+								/> */}
+								<select
+									className="form-input"
+									id="city"
+									type="select"
+									value={userInput}
+									placeholder="Choose city"
+									onChange={changeLocation}
+								>
+									<option disabled value="">
+										Choose from the list
+									</option>
+									{Cities.map((city) => {
+										return (
+											<option key={city} value={city}>
+												{city}
+											</option>
+										);
+									})}
+								</select>
 							</div>
 							<div className="location-body-footer">
 								<button

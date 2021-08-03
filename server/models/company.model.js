@@ -31,6 +31,12 @@ const CompanySchema = new Schema(
 			type: String,
 			required: true,
 		},
+		coverImage: {
+			type: String,
+		},
+		logoImage: {
+			type: String,
+		},
 		user: {
 			type: Schema.Types.ObjectId,
 			ref: "User",

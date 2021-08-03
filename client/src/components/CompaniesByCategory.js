@@ -27,9 +27,14 @@ const CompaniesByCategory = () => {
 						return (
 							<div className="result-container" key={company}>
 								<Link className="result-container_link" to={`/${city}/brand/${company.name}`}>
-									<div>
-										<h3 className="result-container_link-title">{company.name}</h3>
-										<p className="result-container_link-category">{company.category}</p>
+									<div className="result-container_link_content">
+										<div className="result-container_link_image-wrapper">
+											<img className="result-container_link_image" src={company.logoImage} alt="" />
+										</div>
+										<div>
+											<h3 className="result-container_link-title">{company.name}</h3>
+											<p className="result-container_link-category">{company.category}</p>
+										</div>
 									</div>
 								</Link>
 							</div>

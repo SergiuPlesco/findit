@@ -27,27 +27,48 @@ const CompanyDetails = () => {
 			{isLoadingSelected && <div>Loading...</div>}
 			{companySelected && (
 				<div className="company-details_container">
+					<div className="company-details-cover_container">
+						<img
+							className="company-details-cover_image"
+							src={companySelected.coverImage}
+							alt="Cover Image"
+						/>
+					</div>
+					<div className="company-details-logo_container">
+						<div className="company-details-logo_wrapper">
+							<img
+								className="company-details-logo_image"
+								src={companySelected.logoImage}
+								alt="Logo Image"
+							/>
+						</div>
+					</div>
 					<div className="comapny-details_header">
 						<h2 className="company-title">{companySelected.name}</h2>
 						<p className="company-category">{companySelected.category}</p>
 					</div>
 					<div className="company-details_body">
 						<div className="company-details_body-left">
-							<p className="company-details-text">
-								<span className="company-details-label">Services:</span> {companySelected.services}
-							</p>
+							<div className="company-details-text">
+								<h4 className="company-details-label">Services:</h4>
+								<p>{companySelected.services}</p>
+							</div>
 
-							<p className="company-details-text">
-								<span className="company-details-label">City:</span> {companySelected.city}
-							</p>
-							<p className="company-details-text">
-								<span className="company-details-label">Str:</span> {companySelected.address}
-							</p>
-							<p className="company-details-text">
-								<span className="company-details-label">Contact:</span> {companySelected.contact}
-							</p>
+							<div className="company-details-text">
+								<h4 className="company-details-label">City:</h4>
+								<p>{companySelected.city}</p>
+							</div>
+							<div className="company-details-text">
+								<h4 className="company-details-label">Str:</h4>
+								<p>{companySelected.address}</p>
+							</div>
+							<div className="company-details-text">
+								<h4 className="company-details-label">Contact:</h4>
+								<p>{companySelected.contact}</p>
+							</div>
 						</div>
 						<div className="company-details_body-right">
+							<h4 className="company-details-label">About Us</h4>
 							<p className="company-details-text">{companySelected.description}</p>
 						</div>
 					</div>

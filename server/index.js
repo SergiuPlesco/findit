@@ -17,8 +17,8 @@ const app = express();
 connectDB();
 // Middlewares
 app.use(cors());
-app.use(express.json({ extended: true }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ extended: true, limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use(authRouter);
 app.use(userRouter);

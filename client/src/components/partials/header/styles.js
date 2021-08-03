@@ -50,6 +50,7 @@ const MenuContainer = styled.div`
 		display: block;
 		position: static;
 		width: 100%;
+		background-color: transparent;
 	}
 `;
 const UL = styled.ul`

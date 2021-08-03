@@ -11,6 +11,7 @@ const getCityBrandsAndCategories = async (req, res) => {
 				id: company._id,
 				name: company.name,
 				category: company.category,
+				logoImage: company.logoImage,
 			};
 		});
 		const categories = companies.map((company) => company.category);
@@ -45,7 +46,7 @@ const getCompaniesByCategory = async (req, res) => {
 	try {
 		const companiesByCategory = await Company.find({
 			city: { $regex: city, $options: "i" },
-			category: { $regex: category.match(/[a-z]+/gi).join(" "), $options: "i" },
+			category: { $regex: category.match(/[a-z-&]+/gi).join(" "), $options: "i" },
 		});
 		return res.status(200).json(companiesByCategory);
 	} catch (error) {

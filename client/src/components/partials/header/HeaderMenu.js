@@ -25,7 +25,7 @@ const HeaderMenu = () => {
 		if (isUserLoggedIn) {
 			setUserLoggedIn(true);
 		}
-	}, [userLoggedIn, dispatch, isUserLoggedIn]);
+	}, [userLoggedIn, dispatch]);
 	return (
 		<nav className="header-nav">
 			<Button className="menu-toggler" onClick={handleMenuState}>

@@ -28,7 +28,8 @@ const company_register = async (req, res, next) => {
 			success: false,
 			error: `You can have only one company registered`,
 		});
-	const { name, city, category, address, contact, services, description } = req.body;
+	const { name, city, category, address, contact, services, description, coverImage, logoImage } =
+		req.body;
 
 	try {
 		const company = await Company.create({
@@ -39,6 +40,8 @@ const company_register = async (req, res, next) => {
 			contact,
 			services,
 			description,
+			coverImage,
+			logoImage,
 			user: userID,
 		});
 		await User.findByIdAndUpdate(userID, { company: company._id }, { new: true });

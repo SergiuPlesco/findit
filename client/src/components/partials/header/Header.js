@@ -7,16 +7,18 @@ import "./Header.css";
 
 const Header = () => {
 	return (
-		<header className="header-container">
-			<div className="header-menu-container">
-				<Logo />
-				<HeaderMenu />
-			</div>
-			<div className="header-search-location-container">
-				<LocationModal />
-				<SearchBar />
-			</div>
-		</header>
+		<div className="header-background-image">
+			<header className="header-container container">
+				<div className="header-menu-container">
+					<Logo />
+					<HeaderMenu />
+				</div>
+				<div className="header-search-location-container">
+					<LocationModal />
+					<SearchBar />
+				</div>
+			</header>
+		</div>
 	);
 };
 

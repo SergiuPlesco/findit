@@ -25,10 +25,6 @@ const SearchBar = () => {
 				: currentCity.brands.filter((entity) => {
 						return entity.name.toLowerCase().slice(0, inputLength) === inputValue;
 				  });
-		// .filter((entity) => entity.length > 0)
-		// .map((entity) => {
-		// 	return entity.forEach((el) => companiesName.push(el));
-		// });
 
 		const filteredCategories =
 			inputLength === 0
@@ -96,7 +92,9 @@ const SearchBar = () => {
 					<input
 						type="text"
 						className="search-container_input"
-						placeholder="Search business or category"
+						placeholder={`Search business by name or category in ${
+							currentCity?.city ?? "selected city"
+						}`}
 						aria-label="Search"
 						value={searchValue}
 						onChange={handleSearchInput}
