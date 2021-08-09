@@ -8,24 +8,18 @@ import { Button, Backdrop, MenuContainer, UL } from "./styles";
 const HeaderMenu = () => {
 	const [menustate, setMenuState] = useState(false);
 	const [userLoggedIn, setUserLoggedIn] = useState(false);
-	// const tokenExists = localStorage.getItem("authToken");
-	// const userExists = localStorage.getItem("isUserLoggedIn");
 	const isUserLoggedIn = useSelector(userStatus);
 	const id = useSelector(userId);
 	const dispatch = useDispatch();
 	const handleMenuState = () => {
 		setMenuState(!menustate);
 	};
-	// const logOut = () => {
-	// 	localStorage.removeItem("authToken");
-	// 	localStorage.removeItem("isUserLoggedIn");
-	// 	setUserLoggedIn(false);
-	// };
+
 	useEffect(() => {
 		if (isUserLoggedIn) {
 			setUserLoggedIn(true);
 		}
-	}, [userLoggedIn, dispatch]);
+	}, [userLoggedIn, dispatch, isUserLoggedIn]);
 	return (
 		<nav className="header-nav">
 			<Button className="menu-toggler" onClick={handleMenuState}>
@@ -63,7 +57,6 @@ const HeaderMenu = () => {
 								onClick={() => {
 									dispatch(logout());
 									dispatch(logUserOut());
-									console.log("logout dispatched");
 									localStorage.removeItem("authToken");
 									localStorage.removeItem("isUserLoggedIn");
 								}}

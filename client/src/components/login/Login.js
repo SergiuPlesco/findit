@@ -35,7 +35,6 @@ const Login = () => {
 		}
 		dispatch(LoginUser(userToLog))
 			.then((result) => {
-				console.log(result);
 				if (result.error) {
 					throw Error(result.payload.toString());
 				}

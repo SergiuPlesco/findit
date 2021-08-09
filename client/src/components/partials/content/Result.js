@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { city, error, isLoading } from "../../../redux/slices/CitySlice";
 import { getBrandsAndCatByCity } from "../../../redux/services/PublicServices";
 
-import "./Content.css";
+import "./Result.css";
 
 const Content = () => {
 	const dispatch = useDispatch();
@@ -18,26 +18,6 @@ const Content = () => {
 	const selectedCity = useSelector(city);
 	const errorCity = useSelector(error);
 	const isLoadingCity = useSelector(isLoading);
-
-	// const [currentCity, setCurrentCity] = useState();
-	// const [currentCityError, setCurrentCityError] = useState();
-	// const [currentCityLoading, setCurrentCityLoading] = useState();
-
-	// useEffect(() => {
-	// 	if (selectedCity) {
-	// 		setCurrentCity(selectedCity);
-	// 		setCurrentCityLoading(false);
-	// 		setCurrentCityError(null);
-	// 	} else if (errorCity) {
-	// 		setCurrentCityError(errorCity);
-	// 		setCurrentCityLoading(false);
-	// 		setCurrentCity(undefined);
-	// 	} else if (isLoadingCity) {
-	// 		setCurrentCity(undefined);
-	// 		setCurrentCityLoading(isLoadingCity);
-	// 		setCurrentCityError(null);
-	// 	}
-	// }, [selectedCity, errorCity]);
 
 	return (
 		<div>

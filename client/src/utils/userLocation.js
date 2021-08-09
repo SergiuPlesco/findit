@@ -10,7 +10,6 @@ const userLocation = async (lat, lon) => {
 		})
 		.then((data) => {
 			localStorage.setItem("city", data.name);
-			console.log(data.name);
 			return data.name;
 		})
 		.catch((err) => {

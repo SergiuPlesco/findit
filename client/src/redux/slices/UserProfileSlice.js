@@ -21,7 +21,6 @@ const UserProfileSlice = createSlice({
 			state.user = undefined;
 			state.company = undefined;
 			state.isLoading = false;
-			console.log("user profile logout");
 		},
 	},
 	extraReducers: {

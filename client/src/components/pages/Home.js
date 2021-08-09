@@ -1,12 +1,12 @@
-import Content from "../partials/content/Content";
+import Result from "../partials/content/Result";
 import Categories from "../partials/content/Categories";
 
 const Home = () => {
 	return (
-		<div>
+		<main>
 			<Categories />
-			<Content />
-		</div>
+			<Result />
+		</main>
 	);
 };
 
