@@ -4,7 +4,48 @@
 	background-color: #f4f4f4;
 }
 
-.footer p {
+.site-info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.site-info-column {
+	flex: 1 0;
+	margin-bottom: 3rem;
+}
+
+.site-info-column-title {
+	color: #2b273c;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+}
+
+.site-info-column-links p {
+	font-size: 0.875rem;
+	color: #757280;
+	margin-bottom: 0.5rem;
+}
+
+.site-copy {
+	margin-top: 3rem;
+}
+
+.site-copy p {
 	padding: 1rem;
 	text-align: center;
+	font-size: 0.75rem;
+	color: #757280;
+}
+
+@media screen and (min-width: 768px) {
+	.site-info-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.site-info-column {
+		margin-bottom: 0;
+	}
 }

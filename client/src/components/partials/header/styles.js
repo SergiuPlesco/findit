@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MAIN_COLOR = "rgb(242, 84, 91)";
+const MAIN_COLOR = "#c64f24";
 
 const Button = styled.button`
 	display: block;
@@ -67,7 +67,9 @@ const UL = styled.ul`
 			text-decoration: none;
 
 			padding: 0.5rem;
-			font-size: 1.2rem;
+			font-size: 0.875rem;
+			font-weight: bold;
+			letter-spacing: 0.05rem;
 		}
 	}
 

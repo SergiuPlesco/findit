@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
-import FileBase from "react-file-base64";
+// import FileBase from "react-file-base64";
 import imageCompression from "browser-image-compression";
 // React Image File Resize
 
@@ -18,7 +18,7 @@ import {
 import { userToken } from "../redux/slices/AuthSlice";
 import Categories from "../default_data/Categories";
 import Cities from "../default_data/Cities";
-import AddCompany from "./AddCompany";
+// import AddCompany from "./AddCompany";
 import "./Dashboard.css";
 
 const Dashboard = () => {

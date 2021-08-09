@@ -19,10 +19,11 @@ const Categories = () => {
 		};
 		window.addEventListener("resize", changeWS);
 		changeWS();
+
 		return () => {
 			window.removeEventListener("resize", changeWS);
 		};
-	}, [currentCity, cityName, windowSize]);
+	}, [currentCity, cityName, windowSize, transition]);
 
 	const toggleCategoriesList = () => {
 		setTransition(!transition);
@@ -36,22 +37,28 @@ const Categories = () => {
 					<div className="category-cards-wrapper">
 						{CATEGORIES.map((obj, i) => {
 							return i < 3 && windowSize > 768 ? (
-								<>
-									<Link className="category-card-link" to={`/${cityName}/category/${obj.category}`}>
-										<div key={obj.category} className="category-card">
-											<div className="category-card-image-container">
-												<img className="category-card-image" src={obj.image} alt="" />
-											</div>
-											<div className="category-card-title-container">
-												<p className="category-card-title">{obj.category}</p>
-											</div>
+								<Link
+									key={obj.category}
+									className="category-card-link"
+									to={`/${cityName}/category/${obj.category}`}
+								>
+									<div className="category-card">
+										<div className="category-card-image-container">
+											<img className="category-card-image" src={obj.image} alt="" />
 										</div>
-									</Link>
-								</>
+										<div className="category-card-title-container">
+											<p className="category-card-title">{obj.category}</p>
+										</div>
+									</div>
+								</Link>
 							) : (
 								windowSize < 769 && (
-									<Link className="category-card-link" to={`/${cityName}/category/${obj.category}`}>
-										<div key={obj.category} className="category-card">
+									<Link
+										key={obj.category}
+										className="category-card-link"
+										to={`/${cityName}/category/${obj.category}`}
+									>
+										<div className="category-card">
 											<div className="category-card-image-container">
 												<img className="category-card-image" src={obj.image} alt="" />
 											</div>
@@ -67,7 +74,7 @@ const Categories = () => {
 							<div className="category-card">
 								<div className="category-card-image-container">
 									{/* <img className="category-card-image" src={dots} alt="" /> */}
-									<i class="bi bi-three-dots"></i>
+									<i className="bi bi-three-dots"></i>
 								</div>
 								<div className="category-card-title-container">
 									<p className="category-card-title">More categories</p>

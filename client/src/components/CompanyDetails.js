@@ -31,7 +31,7 @@ const CompanyDetails = () => {
 						<img
 							className="company-details-cover_image"
 							src={companySelected.coverImage}
-							alt="Cover Image"
+							alt="Cover"
 						/>
 					</div>
 					<div className="company-details-logo_container">
@@ -39,7 +39,7 @@ const CompanyDetails = () => {
 							<img
 								className="company-details-logo_image"
 								src={companySelected.logoImage}
-								alt="Logo Image"
+								alt="Logo"
 							/>
 						</div>
 					</div>

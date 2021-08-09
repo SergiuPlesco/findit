@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import data from "../data.json";
 import "./SearchBar.css";
 import { city } from "../redux/slices/CitySlice";
 
@@ -17,7 +16,6 @@ const SearchBar = () => {
 	const getSuggestions = (value) => {
 		const inputValue = value.trim().toLowerCase();
 		const inputLength = inputValue.length;
-		// const companiesName = [];
 
 		const filteredBrands =
 			inputLength === 0
@@ -33,13 +31,7 @@ const SearchBar = () => {
 						// Returns an array of "sections" with categories and companies keys
 						return category.toLowerCase().slice(0, inputLength) === inputValue;
 				  });
-		// .map((section) => {
-		// 	// Returns an array with categories of type string
-		// 	return section.category;
-		// });
 
-		console.log(filteredCategories);
-		console.log(filteredBrands);
 		setSuggetions({
 			categories: filteredCategories,
 			companies: filteredBrands,

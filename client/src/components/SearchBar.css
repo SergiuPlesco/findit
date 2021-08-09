@@ -11,21 +11,29 @@
 
 .search-container_input {
 	width: 100%;
-	padding: 0.5rem;
-	font-size: 1rem;
+	padding: 0.6rem;
+	font-size: 1.2rem;
+	border: none;
 }
 
 .reset-input-button {
 	position: absolute;
-	top: 0.5rem;
-	right: 2.5rem;
-	padding: 0.3rem;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 3rem;
+	padding: 0.5rem;
 	border: none;
-	background-color: transparent;
+	background-color: #fff;
+}
+.reset-input-button::placeholder {
+	overflow: hidden;
 }
 
 .search-container_button {
-	padding: 0.5rem;
+	padding: 1rem;
+	border: none;
+	background-color: #c64f24;
+	color: #fff;
 }
 
 .search-results_container {

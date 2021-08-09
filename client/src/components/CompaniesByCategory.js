@@ -42,6 +42,11 @@ const CompaniesByCategory = () => {
 					})}
 				</div>
 			)}
+			{companies.length === 0 && !companiesIsLoading && (
+				<div>
+					<p>There are no companies registered in {category} category</p>
+				</div>
+			)}
 		</div>
 	);
 };
