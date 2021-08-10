@@ -75,7 +75,6 @@ const Categories = () => {
 						<div className="category-card-link category-toggle" onClick={toggleCategoriesList}>
 							<div className="category-card">
 								<div className="category-card-image-container">
-									{/* <img className="category-card-image" src={dots} alt="" /> */}
 									<i className="bi bi-three-dots"></i>
 								</div>
 								<div className="category-card-title-container">

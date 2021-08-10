@@ -90,7 +90,7 @@ const Register = () => {
 					</label>
 					<input
 						id="password"
-						type="text" // password?
+						type="password"
 						className="form-control"
 						placeholder="Password"
 						value={user.password}
@@ -101,7 +101,7 @@ const Register = () => {
 					</label>
 					<input
 						id="repeat_password"
-						type="text" // password?
+						type="password"
 						className="form-control"
 						placeholder="Repeat Password"
 						value={user.repeat_password}

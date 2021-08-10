@@ -5,7 +5,6 @@ import { companiesByCategory, error, isLoading } from "../redux/slices/Companies
 import { getCompaniesByCategory } from "../redux/services/PublicServices";
 
 const CompaniesByCategory = () => {
-	// const currentCity = localStorage.getItem("city");
 	const dispatch = useDispatch();
 	const { city, category } = useParams();
 

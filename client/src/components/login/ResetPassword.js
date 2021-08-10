@@ -60,7 +60,7 @@ const ResetPassword = () => {
 					</label>
 					<input
 						id="new_password"
-						type="text" // password?
+						type="password"
 						className="form-control"
 						placeholder="New Password"
 						value={newPassword.new_password}
@@ -71,7 +71,7 @@ const ResetPassword = () => {
 					</label>
 					<input
 						id="repeat_new_password"
-						type="text" // password?
+						type="password"
 						className="form-control"
 						placeholder="Confirm New Password"
 						value={newPassword.repeat_new_password}

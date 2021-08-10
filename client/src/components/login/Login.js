@@ -76,7 +76,7 @@ const Login = () => {
 					</label>
 					<input
 						id="password"
-						type="text"
+						type="password"
 						className="form-control"
 						placeholder="Password"
 						value={userToLog.password}

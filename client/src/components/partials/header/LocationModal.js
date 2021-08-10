@@ -106,25 +106,6 @@ const LocationModal = () => {
 				onClick={closeLocationDialog}
 			></div>
 			{showLocationDialog && (
-				// <select
-				// 	className="form-input"
-				// 	id="city"
-				// 	type="select"
-				// 	value={userInput}
-				// 	placeholder="Choose city"
-				// 	onChange={changeLocation}
-				// >
-				// 	<option disabled value="">
-				// 		Choose from the list
-				// 	</option>
-				// 	{Cities.map((city) => {
-				// 		return (
-				// 			<option key={city} value={city}>
-				// 				{city}
-				// 			</option>
-				// 		);
-				// 	})}
-				// </select>
 				<div
 					className="location-body"
 					id="changeLocationModal"
@@ -148,16 +129,6 @@ const LocationModal = () => {
 								</button>
 							</div>
 							<div className="location-body-form">
-								{/* <button type="button" className="reset-input-btn" onClick={resetInput}>
-									<i className="bi bi-x"></i>
-								</button> */}
-								{/* <input
-									className="form-input"
-									type="text"
-									value={userInput}
-									onChange={changeLocation}
-									placeholder="Ex. Rezina"
-								/> */}
 								<select
 									className="form-input"
 									id="city"
