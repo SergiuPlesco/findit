@@ -39,17 +39,6 @@ const LocationModal = () => {
 		resetInput();
 	};
 
-	const handleLocationDialogKeyboard = (e) => {
-		if (e.keyCode === 27) {
-			closeLocationDialog();
-		}
-		if (e.keyCode === 13) {
-			setLocation(userInput);
-			localStorage.setItem("city", userInput);
-			closeLocationDialog();
-		}
-	};
-
 	const saveLocationChanges = (e) => {
 		e.preventDefault();
 		if (userInput) {
@@ -80,12 +69,24 @@ const LocationModal = () => {
 					console.log(error);
 				});
 		}
+	}, [location, userInput]);
 
+	useEffect(() => {
+		const handleLocationDialogKeyboard = (e) => {
+			if (e.keyCode === 27) {
+				closeLocationDialog();
+			}
+			if (e.keyCode === 13) {
+				setLocation(userInput);
+				localStorage.setItem("city", userInput);
+				closeLocationDialog();
+			}
+		};
 		document.addEventListener("keyup", handleLocationDialogKeyboard);
 		return () => {
 			document.removeEventListener("keyup", handleLocationDialogKeyboard);
 		};
-	}, [location, userInput]);
+	});
 
 	return (
 		<div className="location-container">

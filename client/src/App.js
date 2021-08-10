@@ -10,7 +10,7 @@ import CompanyDetails from "./components/CompanyDetails";
 import PageNotFound from "./components/pages/PageNotFound";
 import CompaniesByCategory from "./components/CompaniesByCategory";
 import Dashboard from "./components/Dashboard";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/routes/PrivateRoute";
 import Footer from "./components/partials/footer/Footer";
 import Home from "./components/pages/Home";
 

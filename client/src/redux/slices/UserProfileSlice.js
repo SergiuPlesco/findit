@@ -12,104 +12,105 @@ const UserProfileSlice = createSlice({
 	name: "userProfile",
 	initialState: {
 		user: undefined,
-		error: null,
-		isLoading: false,
+		errorUser: null,
+		isLoadingUser: false,
 		company: undefined,
+		errorCompany: null,
+		isLoadingCompany: false,
 	},
 	reducers: {
 		logUserOut: (state) => {
 			state.user = undefined;
 			state.company = undefined;
-			state.isLoading = false;
+			state.isLoadingUser = false;
 		},
 	},
 	extraReducers: {
 		// get user
 		[getUser.pending]: (state) => {
 			state.user = undefined;
-			state.error = null;
-			state.isLoading = true;
+			state.errorUser = null;
+			state.isLoadingUser = true;
 		},
 		[getUser.rejected]: (state, action) => {
 			state.user = undefined;
-			state.error = action.payload;
-			state.isLoading = false;
+			state.errorUser = action.payload;
+			state.isLoadingUser = false;
 		},
 		[getUser.fulfilled]: (state, action) => {
 			state.user = action.payload.user;
-			state.error = null;
-			state.isLoading = false;
+			state.errorUser = null;
+			state.isLoadingUser = false;
 		},
 		// update user
 		[updateUserInfo.pending]: (state) => {
 			state.isLoading = true;
-			state.error = null;
+			state.errorUser = null;
 		},
 		[updateUserInfo.rejected]: (state, action) => {
 			state.error = action.payload;
-			state.isLoading = false;
+			state.isLoadingUser = false;
 		},
 		[updateUserInfo.fulfilled]: (state, action) => {
 			state.user = action.payload.user;
-			state.isLoading = false;
-			state.error = null;
+			state.isLoadingUser = false;
+			state.errorUser = null;
 		},
 		// get company
 		[getUserCompany.pending]: (state) => {
 			state.company = undefined;
-			state.isLoading = true;
-			state.isLoading = true;
+			state.isLoadingCompany = true;
 		},
 		[getUserCompany.rejected]: (state, action) => {
 			state.company = undefined;
-			state.error = action.payload;
-			state.isLoading = false;
+			state.errorCompany = action.payload;
+			state.isLoadingCompany = false;
 		},
 		[getUserCompany.fulfilled]: (state, action) => {
 			state.company = action.payload.company;
-			state.error = null;
-			state.isLoading = false;
+			state.errorCompany = null;
+			state.isLoadingCompany = false;
 		},
 		// add company
 		[addUserCompany.pending]: (state) => {
-			state.isLoading = true;
-			state.error = null;
+			state.isLoadingCompany = true;
+			state.errorCompany = null;
 		},
 		[addUserCompany.rejected]: (state, action) => {
-			state.isLoading = false;
-			state.error = action.payload;
+			state.isLoadingCompany = false;
+			state.errorCompany = action.payload;
 		},
 		[addUserCompany.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			state.error = null;
+			state.isLoadingCompany = false;
+			state.errorCompany = null;
 			state.company = action.payload.company;
 		},
 		// update company
 		[updateUserCompany.pending]: (state) => {
-			state.isLoading = true;
-			state.error = null;
+			state.isLoadingCompany = true;
+			state.errorCompany = null;
 		},
 		[updateUserCompany.rejected]: (state, action) => {
-			state.isLoading = false;
-			state.error = action.payload;
+			state.isLoadingCompany = false;
+			state.errorCompany = action.payload;
 		},
 		[updateUserCompany.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			state.error = null;
+			state.isLoadingCompany = false;
+			state.errorCompany = null;
 			state.company = action.payload.company;
 		},
 		// delete company
 		[deleteUserCompany.pending]: (state) => {
-			state.isLoading = true;
-			state.error = null;
+			state.isLoadingCompany = true;
+			state.errorCompany = null;
 		},
 		[deleteUserCompany.rejected]: (state, action) => {
-			state.isLoading = false;
-			state.error = action.payload;
+			state.isLoadingCompany = false;
+			state.errorCompany = action.payload;
 		},
 		[deleteUserCompany.fulfilled]: (state, action) => {
-			state.isLoading = false;
-			state.error = null;
+			state.isLoadingCompany = false;
+			state.errorCompany = null;
 			state.company = action.payload;
 		},
 	},
@@ -118,10 +119,13 @@ const UserProfileSlice = createSlice({
 // Actions
 export const { logUserOut } = UserProfileSlice.actions;
 
-// Selectors
-export const error = (state) => state.userProfile.error;
-export const isLoading = (state) => state.userProfile.isLoading;
+// User Selectors
 export const user = (state) => state.userProfile.user;
+export const errorUser = (state) => state.userProfile.errorUser;
+export const isLoadingUser = (state) => state.userProfile.isLoadingUser;
+// Company Selectors
 export const company = (state) => state.userProfile.company;
+export const errorCompany = (state) => state.userProfile.errorCompany;
+export const isLoadingCompany = (state) => state.userProfile.isLoadingCompany;
 
 export default UserProfileSlice.reducer;

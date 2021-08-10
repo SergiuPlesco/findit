@@ -28,7 +28,6 @@ const SearchBar = () => {
 			inputLength === 0
 				? []
 				: currentCity.categories.filter((category) => {
-						// Returns an array of "sections" with categories and companies keys
 						return category.toLowerCase().slice(0, inputLength) === inputValue;
 				  });
 
@@ -36,12 +35,6 @@ const SearchBar = () => {
 			categories: filteredCategories,
 			companies: filteredBrands,
 		});
-	};
-
-	const handleSuggestionsWindowKeyboard = (e) => {
-		if (e.keyCode === 27) {
-			closeSuggestionsWindow(e);
-		}
 	};
 
 	const resetSuggestionsInput = (e) => {
@@ -57,26 +50,26 @@ const SearchBar = () => {
 
 	const showResultsBySearch = (e) => {
 		e.preventDefault();
-		// get results by search input, companies brands and categories that start with search query
-		if (suggestions) {
-			console.log(suggestions.companies);
-		}
+		getSuggestions(searchValue);
 	};
 
 	useEffect(() => {
-		if (searchValue) {
-			if (currentCity) {
-				getSuggestions(searchValue);
-			}
-		} else if (searchValue === "") {
+		if (searchValue === "") {
 			setSuggetions(null);
 		}
+	}, [searchValue, currentCity]);
+
+	useEffect(() => {
+		const handleSuggestionsWindowKeyboard = (e) => {
+			if (e.keyCode === 27) {
+				closeSuggestionsWindow(e);
+			}
+		};
 		document.addEventListener("keyup", handleSuggestionsWindowKeyboard);
 		return () => {
 			document.removeEventListener("keyup", handleSuggestionsWindowKeyboard);
 		};
-	}, [searchValue, currentCity]);
-	// show results for search for user city
+	});
 	return (
 		<div className="search-container">
 			<form>
@@ -89,7 +82,10 @@ const SearchBar = () => {
 						}`}
 						aria-label="Search"
 						value={searchValue}
-						onChange={handleSearchInput}
+						onChange={(e) => {
+							handleSearchInput(e);
+							getSuggestions(e.target.value);
+						}}
 						onClick={(e) => {
 							e.stopPropagation();
 							e.preventDefault();
@@ -107,64 +103,62 @@ const SearchBar = () => {
 						<i className="bi bi-search"></i>
 					</button>
 				</div>
-
-				{suggestions && (
-					<div className="search-results_container">
-						{suggestions.companies.length > 0 && (
-							<div className="search-results">
-								<p className="search-results_title">Brands:</p>
-								{suggestions.companies.map((company, index) => {
-									return (
-										<div
-											key={index}
-											onClick={(e) => {
-												closeSuggestionsWindow(e);
-											}}
-											className=""
-										>
-											<Link
-												to={`/${currentCity.city}/brand/${company.name}`}
-												tabIndex="0"
-												className="search-results_text"
-											>
-												{company.name}
-											</Link>
-										</div>
-									);
-								})}
-							</div>
-						)}
-						{suggestions.categories.length > 0 && (
-							<div className="search-results">
-								<p className="search-results_title">Categories:</p>
-								{suggestions.categories.map((category, index) => {
-									return (
-										<div
-											key={index}
-											onClick={(e) => {
-												closeSuggestionsWindow(e);
-											}}
-										>
-											<Link
-												to={`/${localStorage.getItem("city")}/category/${category}`}
-												tabIndex="0"
-												className="search-results_text"
-											>
-												{category}
-											</Link>
-										</div>
-									);
-								})}
-							</div>
-						)}
-						{suggestions.companies.length === 0 && suggestions.categories.length === 0 && (
-							<div className="search-results">
-								<p className="search-results_text">No results, try another search.</p>
-							</div>
-						)}
-					</div>
-				)}
 			</form>
+			{suggestions && (
+				<div className="search-results_container">
+					{suggestions.companies.length > 0 && (
+						<div className="search-results">
+							<p className="search-results_title">Brands:</p>
+							{suggestions.companies.map((company, index) => {
+								return (
+									<div
+										key={index}
+										onClick={(e) => {
+											closeSuggestionsWindow(e);
+										}}
+									>
+										<Link
+											to={`/${currentCity.city}/brand/${company.name}`}
+											tabIndex="0"
+											className="search-results_text"
+										>
+											{company.name}
+										</Link>
+									</div>
+								);
+							})}
+						</div>
+					)}
+					{suggestions.categories.length > 0 && (
+						<div className="search-results">
+							<p className="search-results_title">Categories:</p>
+							{suggestions.categories.map((category, index) => {
+								return (
+									<div
+										key={index}
+										onClick={(e) => {
+											closeSuggestionsWindow(e);
+										}}
+									>
+										<Link
+											to={`/${localStorage.getItem("city")}/category/${category}`}
+											tabIndex="0"
+											className="search-results_text"
+										>
+											{category}
+										</Link>
+									</div>
+								);
+							})}
+						</div>
+					)}
+					{suggestions.companies.length === 0 && suggestions.categories.length === 0 && (
+						<div className="search-results">
+							<p className="search-results_text">No results, try another search.</p>
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };

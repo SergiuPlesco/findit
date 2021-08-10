@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userStatus, logout, userId } from "../../../redux/slices/AuthSlice";
 import { logUserOut } from "../../../redux/slices/UserProfileSlice";
-import { Button, Backdrop, MenuContainer, UL } from "./styles";
+import { Button, Backdrop, MenuContainer, UL } from "./StyledComponents";
 
 const HeaderMenu = () => {
 	const [menustate, setMenuState] = useState(false);

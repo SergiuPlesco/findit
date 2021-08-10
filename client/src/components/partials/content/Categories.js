@@ -6,24 +6,26 @@ import CATEGORIES from "../../../default_data/Categories";
 import { city } from "../../../redux/slices/CitySlice";
 
 const Categories = () => {
-	const [windowSize, setWindowSize] = useState();
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const currentCity = useSelector(city);
 	const [cityName, setCityName] = useState("");
 	const [transition, setTransition] = useState(false);
+
 	useEffect(() => {
 		if (currentCity) {
 			setCityName(currentCity.city);
 		}
-		const changeWS = () => {
-			setWindowSize(window.innerWidth);
-		};
-		window.addEventListener("resize", changeWS);
-		changeWS();
+	}, [currentCity, cityName]);
 
-		return () => {
-			window.removeEventListener("resize", changeWS);
+	useEffect(() => {
+		const changeWindowWidth = () => {
+			setWindowWidth(window.innerWidth);
 		};
-	}, [currentCity, cityName, windowSize, transition]);
+		window.addEventListener("resize", changeWindowWidth);
+		return () => {
+			window.removeEventListener("resize", changeWindowWidth);
+		};
+	});
 
 	const toggleCategoriesList = () => {
 		setTransition(!transition);
@@ -36,7 +38,7 @@ const Categories = () => {
 				<div className="category-cards-container">
 					<div className="category-cards-wrapper">
 						{CATEGORIES.map((obj, i) => {
-							return i < 3 && windowSize > 768 ? (
+							return i < 3 && windowWidth > 768 ? (
 								<Link
 									key={obj.category}
 									className="category-card-link"
@@ -52,7 +54,7 @@ const Categories = () => {
 									</div>
 								</Link>
 							) : (
-								windowSize < 769 && (
+								windowWidth < 769 && (
 									<Link
 										key={obj.category}
 										className="category-card-link"

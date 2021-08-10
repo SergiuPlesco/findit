@@ -5,7 +5,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import imageCompression from "browser-image-compression";
 // React Image File Resize
 
-import { error, isLoading, user, company } from "../redux/slices/UserProfileSlice";
+import { errorCompany, isLoadingCompany, user, company } from "../redux/slices/UserProfileSlice";
 import {
 	getUserCompany,
 	addUserCompany,
@@ -24,8 +24,8 @@ const CompanyProfile = () => {
 		dispatch(getUserCompany({ userID, token }));
 	}, [dispatch, userID, token]);
 
-	const userError = useSelector(error);
-	const userLoading = useSelector(isLoading);
+	const companyError = useSelector(errorCompany);
+	const companyLoading = useSelector(isLoadingCompany);
 	const currentUser = useSelector(user);
 	const currentCompany = useSelector(company);
 
@@ -48,7 +48,6 @@ const CompanyProfile = () => {
 	const submitUpdateCompanyForm = (e) => {
 		e.preventDefault();
 		dispatch(updateUserCompany({ userID: currentUser._id, token, company: companyForm }));
-		console.log(companyForm);
 	};
 
 	const submitAddCompanyForm = (e) => {
@@ -58,7 +57,6 @@ const CompanyProfile = () => {
 
 	const deleteCompany = (e) => {
 		e.preventDefault();
-		console.log("company deleted");
 		dispatch(deleteUserCompany({ userID: currentUser._id, token }));
 	};
 	const handleImageUpload = async (e) => {
@@ -100,9 +98,9 @@ const CompanyProfile = () => {
 		});
 	};
 	return (
-		<>
-			{userError && <div>{userError}</div>}
-			{userLoading && <div>Loading...</div>}
+		<div>
+			{companyError && <div>{companyError}</div>}
+			{companyLoading && <div>Loading...</div>}
 			{companyForm && (
 				<div className="company-container">
 					<h3 className="dashboard-title">Company Details</h3>
@@ -144,7 +142,7 @@ const CompanyProfile = () => {
 						</div>
 						<div className="field-container">
 							<label className="field-container_label" htmlFor="category">
-								Category:
+								Category
 							</label>
 							<select
 								className="field-container_input"
@@ -275,7 +273,7 @@ const CompanyProfile = () => {
 					</form>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

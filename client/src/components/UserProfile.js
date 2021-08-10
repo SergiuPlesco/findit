@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { error, isLoading, user } from "../redux/slices/UserProfileSlice";
+import { errorUser, isLoadingUser, user } from "../redux/slices/UserProfileSlice";
 import { getUser, updateUserInfo } from "../redux/services/UserProfileServices";
 import { userToken } from "../redux/slices/AuthSlice";
-import "./Dashboard.css";
 
 const UserProfile = () => {
 	const { userID } = useParams();
@@ -15,8 +14,8 @@ const UserProfile = () => {
 		dispatch(getUser({ userID, token }));
 	}, [dispatch, userID, token]);
 
-	const userError = useSelector(error);
-	const userLoading = useSelector(isLoading);
+	const userError = useSelector(errorUser);
+	const userLoading = useSelector(isLoadingUser);
 	const currentUser = useSelector(user);
 	const [userForm, setUserForm] = useState({});
 
@@ -39,7 +38,7 @@ const UserProfile = () => {
 		dispatch(updateUserInfo({ userID: currentUser._id, token, user: userForm }));
 	};
 	return (
-		<>
+		<div>
 			{userError && <div>{userError}</div>}
 			{userLoading && <div>Loading...</div>}
 			{userForm && (
@@ -72,7 +71,7 @@ const UserProfile = () => {
 						</div>
 						<div className="field-container">
 							<label className="field-container_label" htmlFor="email">
-								Email
+								Email:
 							</label>
 							<input
 								className="field-container_input"
@@ -90,7 +89,7 @@ const UserProfile = () => {
 					</form>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 
