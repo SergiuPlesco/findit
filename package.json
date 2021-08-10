@@ -6,7 +6,9 @@
 	"scripts": {
 		"server": "npx nodemon index --prefix server",
 		"client": "npm start --prefix client",
-		"dev": "concurrently \"npm run client\" \"npm run server\""
+		"dev": "concurrently \"npm run client\" \"npm run server\"",
+		"start": "npm run server",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend"
 	},
 	"keywords": [],
 	"author": "",

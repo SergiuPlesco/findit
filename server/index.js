@@ -9,6 +9,11 @@ import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import companyRouter from "./routes/company.routes.js";
 import publicRouter from "./routes/public.routes.js";
+// For heroku 13-15 lines
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 // Variables
 const PORT = process.env.PORT || 3001;
 
@@ -19,11 +24,17 @@ connectDB();
 app.use(cors());
 app.use(express.json({ extended: true, limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-
+// Routes
 app.use(authRouter);
 app.use(userRouter);
 app.use(companyRouter);
 app.use(publicRouter);
+
+// for heroku
+app.use(express.static(path.resolve(__dirname, "../frontend/build")));
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"));
+});
 
 app.listen(PORT, (error) => {
 	if (error) {
