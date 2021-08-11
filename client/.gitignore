@@ -10,7 +10,7 @@
 
 # production
 # /build
-src/default_data/CitiesMD.js
+CitiesMD.*
 
 
 # misc

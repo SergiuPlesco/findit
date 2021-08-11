@@ -24,7 +24,7 @@ const Footer = () => {
 					<div className="site-info-column">
 						<h3 className="site-info-column-title">Country</h3>
 						<div className="site-info-column-links">
-							<p>Moldova</p>
+							<p>United Kingdom</p>
 						</div>
 					</div>
 				</div>
