@@ -68,4 +68,4 @@ const CITIESMD = [
 	"Vulcanesti",
 ].sort();
 
-// export default CITIESMD;
+export default CITIESMD;
