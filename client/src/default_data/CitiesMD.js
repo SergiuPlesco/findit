@@ -1,4 +1,4 @@
-const CITIES = [
+const CITIESMD = [
 	"Rezina",
 	"Chisinau",
 	"Soldanesti",
@@ -68,4 +68,4 @@ const CITIES = [
 	"Vulcanesti",
 ].sort();
 
-export default CITIES;
+export default CITIESMD;

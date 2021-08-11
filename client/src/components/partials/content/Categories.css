@@ -121,14 +121,16 @@
 		padding-top: 0rem;
 		opacity: 0;
 		max-height: 0px;
+		visibility: hidden;
 		transition: padding-top 200ms ease-in-out, margin-top 200ms ease-in-out,
-			max-height 200ms ease-in-out, opacity 200ms ease-in-out;
+			max-height 200ms ease-in-out, opacity 200ms ease-in-out, visibilyty 200ms ease-in-out;
 	}
 	.transition {
 		margin-top: 2rem;
 		padding-top: 2rem;
 		max-height: 250px;
 		opacity: 1;
+		visibility: visible;
 	}
 
 	.more-categories-container-link {

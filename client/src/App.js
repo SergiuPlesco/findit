@@ -15,6 +15,10 @@ import Footer from "./components/partials/footer/Footer";
 import Home from "./components/pages/Home";
 
 function App() {
+	// default location
+	if (!localStorage.getItem("city")) {
+		localStorage.setItem("city", "London");
+	}
 	return (
 		<Router>
 			<Header />

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import getUserCoordinates from "../../../utils/getUserCoordinates";
-import userLocation from "../../../utils/userLocation";
 import { useDispatch } from "react-redux";
 import { getBrandsAndCatByCity } from "../../../redux/services/PublicServices";
-import Cities from "../../../default_data/Cities";
+import Cities from "../../../default_data/CitiesUK";
 
 import "./LocationModal.css";
 
@@ -50,26 +48,6 @@ const LocationModal = () => {
 		}
 		closeLocationDialog();
 	};
-	useEffect(() => {
-		if (!localStorage.getItem("city")) {
-			getUserCoordinates()
-				.then((position) => {
-					const lat = position.coords.latitude;
-					const lon = position.coords.longitude;
-
-					userLocation(lat, lon)
-						.then((data) => {
-							setLocation(data);
-						})
-						.catch((error) => {
-							console.log(error);
-						});
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		}
-	}, [location, userInput]);
 
 	useEffect(() => {
 		const handleLocationDialogKeyboard = (e) => {

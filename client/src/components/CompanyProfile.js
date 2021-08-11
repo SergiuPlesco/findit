@@ -14,7 +14,7 @@ import {
 } from "../redux/services/UserProfileServices";
 import { userToken } from "../redux/slices/AuthSlice";
 import Categories from "../default_data/Categories";
-import Cities from "../default_data/Cities";
+import Cities from "../default_data/CitiesUK";
 
 const CompanyProfile = () => {
 	const { userID } = useParams();
