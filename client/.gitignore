@@ -10,7 +10,8 @@
 
 # production
 # /build
-/CitiesMD.js
+src/default_data/CitiesMD.js
+
 
 # misc
 .DS_Store
