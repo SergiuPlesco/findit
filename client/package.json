@@ -11,6 +11,7 @@
 		"axios": "^0.21.1",
 		"bootstrap-icons": "^1.5.0",
 		"browser-image-compression": "^1.0.14",
+		"caniuse-lite": "^1.0.30001598",
 		"joi": "^17.4.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",

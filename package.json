@@ -1,20 +1,19 @@
 {
-	"name": "findit",
-	"version": "1.0.0",
-	"description": "no description",
-	"main": "index.js",
-	"scripts": {
-		"server": "npx nodemon index --prefix server",
-		"client": "npm start --prefix client",
-		"dev": "concurrently \"npm run client\" \"npm run server\"",
-		"start": "npm run server",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"concurrently": "^6.2.0",
-		"dotenv": "^10.0.0"
-	}
+  "name": "findit",
+  "version": "1.0.0",
+  "description": "no description",
+  "main": "index.js",
+  "scripts": {
+    "server": "npx nodemon index --prefix server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "start": "npm run server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5"
+  }
 }

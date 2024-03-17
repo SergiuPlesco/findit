@@ -9,10 +9,6 @@ import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import companyRouter from "./routes/company.routes.js";
 import publicRouter from "./routes/public.routes.js";
-// For heroku 13-15 lines
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Variables
 const PORT = process.env.PORT || 3001;
@@ -30,15 +26,9 @@ app.use(userRouter);
 app.use(companyRouter);
 app.use(publicRouter);
 
-// for heroku
-app.use(express.static(path.resolve(__dirname, "../client/build")));
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-});
-
 app.listen(PORT, (error) => {
-	if (error) {
-		console.log("An error has occured", error);
-	}
-	console.log("FindIt App listening on port: " + PORT);
+  if (error) {
+    console.log("An error has occured", error);
+  }
+  console.log("FindIt App listening on port: " + PORT);
 });
