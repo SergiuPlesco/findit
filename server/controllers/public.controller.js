@@ -3,7 +3,7 @@ const getCityBrandsAndCategories = async (req, res) => {
   let filters = {};
   const city = req.params.city;
   if (city) filters.city = city;
-  console.log("city", city);
+
   try {
     const companies = await Company.find(filters);
     const brands = companies.map((company) => {
