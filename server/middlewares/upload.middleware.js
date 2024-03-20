@@ -2,10 +2,9 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "server/uploads");
   },
   filename: (req, file, cb) => {
-    console.log(file);
     const formatedDate = new Date()
       .toLocaleDateString("en-US", {
         year: "numeric",
@@ -13,9 +12,10 @@ const storage = multer.diskStorage({
         day: "2-digit",
       })
       .replace(/\//g, "-");
-    const fileExtentsion = file.mimetype.split("/").pop();
 
-    const fileName = `${formatedDate}-findit.${fileExtentsion}`;
+    const originalName = file.originalname.toLowerCase().replaceAll(" ", "");
+
+    const fileName = `${formatedDate}-${originalName}`;
 
     cb(null, fileName);
   },

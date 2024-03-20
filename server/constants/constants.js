@@ -1,1 +1,1 @@
-export const uploadFolderName = "uploads";
+export const uploadFolderName = "server/uploads";

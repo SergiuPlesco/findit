@@ -72,7 +72,6 @@ const company_register = async (req, res, next) => {
 };
 
 const company_update_details = async (req, res) => {
-  console.log(req.files);
   const userID = req.params.userID;
   try {
     const user = await User.findOne({ _id: userID });
