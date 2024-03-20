@@ -57,6 +57,7 @@ const addUserCompany = createAsyncThunk(
       const result = await axios.post(`/users/${userID}/company`, company, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       console.log(result.data);
@@ -74,6 +75,7 @@ const updateUserCompany = createAsyncThunk(
       const result = await axios.put(`/users/${userID}/company`, company, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       return result.data;

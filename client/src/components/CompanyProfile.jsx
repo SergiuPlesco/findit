@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
-import imageCompression from "browser-image-compression";
-// React Image File Resize
+import generateSHA256HASH from "../utils/generateSHA256HASH";
 
 import {
   errorCompany,
@@ -34,11 +33,15 @@ const CompanyProfile = () => {
   const currentUser = useSelector(user);
   const currentCompany = useSelector(company);
   const [companyForm, setCompanyForm] = useState({});
+  const [hash, setHash] = useState("");
 
   useEffect(() => {
-    setCompanyForm({
-      ...currentCompany,
-    });
+    getHashCode();
+    if (hash && currentCompany) {
+      setCompanyForm({
+        ...currentCompany,
+      });
+    }
   }, [currentUser, currentCompany]);
 
   const handleCompanyForm = (e) => {
@@ -49,13 +52,27 @@ const CompanyProfile = () => {
     });
   };
 
-  const submitUpdateCompanyForm = (e) => {
+  const getHashCode = async () => {
+    const code = await generateSHA256HASH();
+    if (code) {
+      setHash(code);
+    }
+  };
+
+  const submitUpdateCompanyForm = async (e) => {
+    const formData = new FormData();
+    for (let i = 0; i < Object.entries(companyForm).length; i++) {
+      formData.append(
+        Object.keys(companyForm)[i],
+        Object.values(companyForm)[i]
+      );
+    }
     e.preventDefault();
     dispatch(
       updateUserCompany({
         userID: currentUser._id,
         token,
-        company: companyForm,
+        company: formData,
       })
     );
   };
@@ -72,24 +89,11 @@ const CompanyProfile = () => {
     dispatch(deleteUserCompany({ userID: currentUser._id, token }));
   };
   const handleImageUpload = async (e) => {
-    const imageFile = e.target.files[0];
-
-    const options = {
-      maxSizeMB: 0.5,
-      maxWidthOrHeight: 1440,
-      useWebWorker: true,
-    };
     try {
-      const compressedImage = await imageCompression(imageFile, options);
-      const reader = new FileReader();
-      reader.readAsDataURL(compressedImage);
-      reader.onloadend = () => {
-        const base64 = reader.result;
-        setCompanyForm({
-          ...companyForm,
-          [e.target.id]: base64,
-        });
-      };
+      setCompanyForm({
+        ...companyForm,
+        [e.target.id]: e.target.files[0],
+      });
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +121,7 @@ const CompanyProfile = () => {
   if (companyLoading) {
     return <div>Loading...</div>;
   }
-  console.log(companyForm);
+
   return (
     <div>
       <div className="company-container">
@@ -289,7 +293,7 @@ const CompanyProfile = () => {
               <>
                 <button
                   className="button"
-                  type="submit"
+                  type="button"
                   onClick={submitUpdateCompanyForm}
                 >
                   Update
