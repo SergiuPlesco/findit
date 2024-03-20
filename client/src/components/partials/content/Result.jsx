@@ -40,7 +40,9 @@ const Content = () => {
                     <div className="result-container_link_image-wrapper">
                       <img
                         className="result-container_link_image"
-                        src={company.logoImage}
+                        src={`${import.meta.env.VITE_IMAGES_URL}/${
+                          company.logoImage
+                        }`}
                         alt=""
                       />
                     </div>
