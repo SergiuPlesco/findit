@@ -34,17 +34,8 @@ const company_register = async (req, res, next) => {
       success: false,
       error: `You can have only one company registered`,
     });
-  const {
-    name,
-    city,
-    category,
-    address,
-    contact,
-    services,
-    description,
-    coverImage,
-    logoImage,
-  } = req.body;
+  const { name, city, category, address, contact, services, description } =
+    req.body;
 
   try {
     const company = await Company.create({
@@ -55,11 +46,11 @@ const company_register = async (req, res, next) => {
       contact,
       services,
       description,
-      coverImage,
-      logoImage,
+      coverImage: `${process.env.IMAGES_URL}/${req.files["coverImage"][0].originalname}`,
+      logoImage: `${process.env.IMAGES_URL}/${req.files["logoImage"][0].originalname}`,
       user: userID,
     });
-    console.log(req.body);
+
     await User.findByIdAndUpdate(
       userID,
       { company: company._id },
@@ -87,11 +78,14 @@ const company_update_details = async (req, res) => {
     const company = await Company.findOneAndUpdate(
       { _id: user.company },
       {
-        $set: req.body,
+        $set: {
+          ...req.body,
+          coverImage: `${process.env.IMAGES_URL}/${req.files["coverImage"][0].originalname}`,
+          logoImage: `${process.env.IMAGES_URL}/${req.files["logoImage"][0].originalname}`,
+        },
       },
       { new: true }
     );
-
     return res.status(200).json({ success: true, company });
   } catch (error) {
     return res
