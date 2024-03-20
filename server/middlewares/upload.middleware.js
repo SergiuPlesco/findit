@@ -5,7 +5,17 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    const fileName = file.originalname;
+    console.log(file);
+    const formatedDate = new Date()
+      .toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/\//g, "-");
+    const fileExtentsion = file.mimetype.split("/").pop();
+
+    const fileName = `${formatedDate}-findit.${fileExtentsion}`;
 
     cb(null, fileName);
   },

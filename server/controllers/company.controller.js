@@ -46,8 +46,12 @@ const company_register = async (req, res, next) => {
       contact,
       services,
       description,
-      coverImage: `${process.env.IMAGES_URL}/${req.files["coverImage"][0].originalname}`,
-      logoImage: `${process.env.IMAGES_URL}/${req.files["logoImage"][0].originalname}`,
+      coverImage: req.files["coverImage"]
+        ? `${req.files["coverImage"][0].originalname}`
+        : "",
+      logoImage: req.files["logoImage"]
+        ? `${req.files["logoImage"][0].originalname}`
+        : "",
       user: userID,
     });
 
@@ -68,6 +72,7 @@ const company_register = async (req, res, next) => {
 };
 
 const company_update_details = async (req, res) => {
+  console.log(req.files);
   const userID = req.params.userID;
   try {
     const user = await User.findOne({ _id: userID });
@@ -80,8 +85,12 @@ const company_update_details = async (req, res) => {
       {
         $set: {
           ...req.body,
-          coverImage: `${process.env.IMAGES_URL}/${req.files["coverImage"][0].originalname}`,
-          logoImage: `${process.env.IMAGES_URL}/${req.files["logoImage"][0].originalname}`,
+          coverImage: req.files["coverImage"]
+            ? `${req.files["coverImage"][0].filename}`
+            : req.body.coverImage,
+          logoImage: req.files["logoImage"]
+            ? `${req.files["logoImage"][0].filename}`
+            : req.body.logoImage,
         },
       },
       { new: true }

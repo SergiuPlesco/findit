@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
-import generateSHA256HASH from "../utils/generateSHA256HASH";
 
 import {
   errorCompany,
@@ -33,15 +32,11 @@ const CompanyProfile = () => {
   const currentUser = useSelector(user);
   const currentCompany = useSelector(company);
   const [companyForm, setCompanyForm] = useState({});
-  const [hash, setHash] = useState("");
 
   useEffect(() => {
-    getHashCode();
-    if (hash && currentCompany) {
-      setCompanyForm({
-        ...currentCompany,
-      });
-    }
+    setCompanyForm({
+      ...currentCompany,
+    });
   }, [currentUser, currentCompany]);
 
   const handleCompanyForm = (e) => {
@@ -50,13 +45,6 @@ const CompanyProfile = () => {
       ...companyForm,
       [e.target.id]: e.target.value,
     });
-  };
-
-  const getHashCode = async () => {
-    const code = await generateSHA256HASH();
-    if (code) {
-      setHash(code);
-    }
   };
 
   const submitUpdateCompanyForm = async (e) => {
@@ -79,8 +67,15 @@ const CompanyProfile = () => {
 
   const submitAddCompanyForm = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    for (let i = 0; i < Object.entries(companyForm).length; i++) {
+      formData.append(
+        Object.keys(companyForm)[i],
+        Object.values(companyForm)[i]
+      );
+    }
     dispatch(
-      addUserCompany({ userID: currentUser._id, token, company: companyForm })
+      addUserCompany({ userID: currentUser._id, token, company: formData })
     );
   };
 
@@ -256,7 +251,9 @@ const CompanyProfile = () => {
             <div className="image-preview">
               <img
                 className="image-preview_image"
-                src={companyForm.coverImage}
+                src={`${import.meta.env.VITE_IMAGES_URL}/${
+                  companyForm.coverImage
+                }`}
                 alt=""
               />
             </div>
@@ -283,7 +280,9 @@ const CompanyProfile = () => {
             <div className="image-preview">
               <img
                 className="image-preview_image"
-                src={companyForm.logoImage}
+                src={`${import.meta.env.VITE_IMAGES_URL}/${
+                  companyForm.logoImage
+                }`}
                 alt=""
               />
             </div>
