@@ -2,12 +2,11 @@
   "name": "findit",
   "version": "1.0.0",
   "description": "no description",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "server": "npx nodemon index --prefix server",
+    "server": "npm start --prefix server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "start": "npm run server"
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "keywords": [],
   "author": "",
