@@ -1,6 +1,7 @@
 import Company from "../models/company.model.js";
-const getCityBrandsAndCategories = async (req, res) => {
-  let filters = {};
+import type { Request, Response } from "express";
+const getCityBrandsAndCategories = async (req: Request, res: Response) => {
+  let filters = { city: "" };
   const city = req.params.city;
   if (city) filters.city = city;
 
@@ -17,12 +18,14 @@ const getCityBrandsAndCategories = async (req, res) => {
     const categories = companies.map((company) => company.category);
 
     return res.status(200).json({ city, brands, categories });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 };
 
-const getCompanyDetails = async (req, res) => {
+const getCompanyDetails = async (req: Request, res: Response) => {
   const city = req.params.city;
   const brand = req.params.brand;
   try {
@@ -31,32 +34,40 @@ const getCompanyDetails = async (req, res) => {
       name: { $regex: brand, $options: "i" },
     });
     return res.status(200).json(company);
-  } catch (error) {
-    return req.status(404).json({
-      success: false,
-      error: `Could not find the company you looking for. ${error.message}`,
-    });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(404).json({
+        success: false,
+        error: `Could not find the company you looking for. ${error.message}`,
+      });
+    }
   }
 };
 
-const getCompaniesByCategory = async (req, res) => {
+const getCompaniesByCategory = async (req: Request, res: Response) => {
   const city = req.params.city;
   const category = req.params.category;
 
+  if (!city || !category) {
+    return res.status(404).json({ success: false, error: "Bad request." });
+  }
+
   try {
     const companiesByCategory = await Company.find({
-      city: { $regex: city, $options: "i" },
+      city: { city: city, $options: "i" },
       category: {
-        $regex: category.match(/[a-z-&]+/gi).join(" "),
+        category: category,
         $options: "i",
       },
     });
     return res.status(200).json(companiesByCategory);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      error: `Could not retrieve categories. ${error.message}`,
-    });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(500).json({
+        success: false,
+        error: `Could not retrieve categories. ${error.message}`,
+      });
+    }
   }
 };
 

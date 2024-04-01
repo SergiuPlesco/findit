@@ -17,7 +17,7 @@ const app = express();
 
 // Middlewares
 app.use(cors());
-app.use(express.json({ extended: true, limit: "50mb" }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use("/images", express.static(`${uploadFolderName}`));
 // Routes
@@ -27,10 +27,7 @@ app.use(companyRouter);
 app.use(publicRouter);
 
 connectDB().then(() => {
-  app.listen(PORT, (error) => {
-    if (error) {
-      console.log("An error has occured", error);
-    }
+  app.listen(PORT, () => {
     console.log("FindIt App listening on port: " + PORT);
   });
 });

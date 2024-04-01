@@ -1,9 +1,10 @@
 import Company from "../models/company.model.js";
 import User from "../models/user.model.js";
+import type { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
-const company_details = async (req, res) => {
+const company_details = async (req: Request, res: Response) => {
   const userID = req.params.userID;
   try {
     const user = await User.findOne({ _id: userID });
@@ -11,23 +12,32 @@ const company_details = async (req, res) => {
       return res
         .status(404)
         .json({ success: false, error: "Could not find the user." });
-    if (user?.company) {
-      const company = await Company.findOne({ _id: user.company });
+    if (user?.companyId) {
+      const company = await Company.findOne({ _id: user.companyId });
       return res.status(200).json({ success: true, company });
     }
-  } catch (error) {
-    return res.status(500).json({ success: false, error: `${error.message}` });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res
+        .status(500)
+        .json({ success: false, error: `${error.message}` });
+    }
   }
 };
 
-const company_register = async (req, res, next) => {
+const company_register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
   const userID = req.params.userID;
   const user = await User.findOne({ _id: userID });
   if (!user)
     return res
       .status(404)
       .json({ success: false, error: "Could not find the user." });
-  const userCompany = user.company;
+  const userCompany = user.companyId;
 
   if (userCompany)
     return res.status(409).json({
@@ -46,11 +56,11 @@ const company_register = async (req, res, next) => {
       contact,
       services,
       description,
-      coverImage: req.files["coverImage"]
-        ? `${req.files["coverImage"][0].originalname}`
+      coverImage: files["coverImage"]
+        ? `${files["coverImage"][0]?.originalname}`
         : "",
-      logoImage: req.files["logoImage"]
-        ? `${req.files["logoImage"][0].originalname}`
+      logoImage: files["logoImage"]
+        ? `${files["logoImage"][0]?.originalname}`
         : "",
       user: userID,
     });
@@ -63,15 +73,18 @@ const company_register = async (req, res, next) => {
     return res
       .status(201)
       .json({ success: true, message: "Company added successfuly", company });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      error: `Could not add company, ${error.message}`,
-    });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(500).json({
+        success: false,
+        error: `Could not add company, ${error.message}`,
+      });
+    }
   }
 };
 
-const company_update_details = async (req, res) => {
+const company_update_details = async (req: Request, res: Response) => {
+  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
   const userID = req.params.userID;
   try {
     const user = await User.findOne({ _id: userID });
@@ -80,29 +93,31 @@ const company_update_details = async (req, res) => {
         .status(404)
         .json({ success: false, error: "Could not find the user." });
     const company = await Company.findOneAndUpdate(
-      { _id: user.company },
+      { _id: user.companyId },
       {
         $set: {
           ...req.body,
-          coverImage: req.files["coverImage"]
-            ? `${req.files["coverImage"][0].filename}`
+          coverImage: files["coverImage"]
+            ? `${files["coverImage"][0]?.filename}`
             : req.body.coverImage,
-          logoImage: req.files["logoImage"]
-            ? `${req.files["logoImage"][0].filename}`
+          logoImage: files["logoImage"]
+            ? `${files["logoImage"][0]?.filename}`
             : req.body.logoImage,
         },
       },
       { new: true }
     );
     return res.status(200).json({ success: true, company });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ success: false, errror: `Could not update, ${error.message}` });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res
+        .status(500)
+        .json({ success: false, errror: `Could not update, ${error.message}` });
+    }
   }
 };
 
-const company_delete = async (req, res) => {
+const company_delete = async (req: Request, res: Response) => {
   const userID = req.params.userID;
   try {
     const user = await User.findOne({ _id: userID });
@@ -111,17 +126,19 @@ const company_delete = async (req, res) => {
         .status(404)
         .json({ success: false, error: "Could not find the user." });
 
-    await Company.deleteOne({ _id: user.company });
-    user.company = undefined;
+    await Company.deleteOne({ _id: user.companyId });
+    user.companyId = undefined;
     await user.save();
     return res
       .status(200)
       .json({ success: true, message: "Company deleted.", user });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      error: `Could not delete company, ${error.message}`,
-    });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(500).json({
+        success: false,
+        error: `Could not delete company, ${error.message}`,
+      });
+    }
   }
 };
 

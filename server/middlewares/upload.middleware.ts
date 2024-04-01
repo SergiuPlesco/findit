@@ -1,10 +1,11 @@
 import multer from "multer";
+import type { Request } from "express";
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (req: Request, file: Express.Multer.File, cb) => {
     cb(null, "server/uploads");
   },
-  filename: (req, file, cb) => {
+  filename: (req: Request, file: Express.Multer.File, cb) => {
     const formatedDate = new Date()
       .toLocaleDateString("en-US", {
         year: "numeric",
@@ -23,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  fileFilter: (req, file, cb) => {
+  fileFilter: (req: Request, file: Express.Multer.File, cb) => {
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||

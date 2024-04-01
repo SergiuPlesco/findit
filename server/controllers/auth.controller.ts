@@ -1,8 +1,10 @@
 import User from "../models/user.model.js";
 import sendMail from "../utils/sendMail.js";
-import crypto from "crypto";
+import crypto, { type BinaryLike } from "crypto";
+import type { Request, Response } from "express";
+import type { UserType } from "../models/user.model.js";
 
-const users_register = async (req, res) => {
+const users_register = async (req: Request, res: Response) => {
   const { firstname, lastname, email, password } = req.body;
 
   try {
@@ -22,12 +24,14 @@ const users_register = async (req, res) => {
     return res
       .status(201)
       .json({ success: true, message: "User successfully created." });
-  } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(500).json({ success: false, error: error.message });
+    }
   }
 };
 
-const users_login = async (req, res) => {
+const users_login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -52,12 +56,14 @@ const users_login = async (req, res) => {
     }
 
     sendLoginToken(user, 200, res);
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+  } catch (error: any) {
+    if (error && error?.message) {
+      res.status(500).json({ success: false, error: error?.message });
+    }
   }
 };
 
-const users_forgotpassword = async (req, res) => {
+const users_forgotpassword = async (req: Request, res: Response) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -83,25 +89,28 @@ const users_forgotpassword = async (req, res) => {
       return res
         .status(200)
         .json({ success: true, message: "Email has been sent" });
-    } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-      await user.save();
-      return res.status(500).json({
-        success: false,
-        error: `Email could not be sent ${error.message}`,
-      });
+    } catch (error: any) {
+      if (error && error.message) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save();
+        return res.status(500).json({
+          success: false,
+          error: `Email could not be sent ${error.message}`,
+        });
+      }
     }
-  } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+  } catch (error: any) {
+    if (error && error.message) {
+      return res.status(500).json({ success: false, error: error.message });
+    }
   }
 };
 
-const users_resetpassword = async (req, res) => {
-  console.log(req.params.resetToken);
+const users_resetpassword = async (req: Request, res: Response) => {
   const resetPasswordToken = crypto
     .createHash("sha256")
-    .update(req.params.resetToken)
+    .update(req.params.resetToken as BinaryLike)
     .digest("hex");
   console.log("Reset pass: ", resetPasswordToken);
   try {
@@ -121,12 +130,14 @@ const users_resetpassword = async (req, res) => {
     return res
       .status(201)
       .json({ success: true, message: "Password reset succesfuly" });
-  } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+  } catch (error: any) {
+    if (error && error.message) {
+      res.status(400).json({ success: false, error: error.message });
+    }
   }
 };
 
-const sendLoginToken = (user, statusCode, res) => {
+const sendLoginToken = (user: UserType, statusCode: number, res: Response) => {
   const token = user.getSignedToken();
 
   res.status(statusCode).json({ success: true, token, id: user._id });
