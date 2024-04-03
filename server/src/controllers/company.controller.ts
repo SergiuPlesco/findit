@@ -84,8 +84,9 @@ const company_register = async (
 };
 
 const company_update_details = async (req: Request, res: Response) => {
-  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+  // const files = req.files as { [fieldname: string]: Express.Multer.File[] };
   const userID = req.params.userID;
+
   try {
     const user = await User.findOne({ _id: userID });
     if (!user)
@@ -97,12 +98,12 @@ const company_update_details = async (req: Request, res: Response) => {
       {
         $set: {
           ...req.body,
-          coverImage: files["coverImage"]
-            ? `${files["coverImage"][0]?.filename}`
-            : req.body.coverImage,
-          logoImage: files["logoImage"]
-            ? `${files["logoImage"][0]?.filename}`
-            : req.body.logoImage,
+          // coverImage: files["coverImage"]
+          //   ? `${files["coverImage"][0]?.filename}`
+          //   : req.body.coverImage,
+          // logoImage: files["logoImage"]
+          //   ? `${files["logoImage"][0]?.filename}`
+          //   : req.body.logoImage,
         },
       },
       { new: true }

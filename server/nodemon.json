@@ -1,0 +1,9 @@
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "execMap": {
+    "ts": "tsc --noEmit && node --no-warnings=ExperimentalWarnings --loader ts-node/esm"
+  },
+  "inspect": true,
+  "verbose": true
+}

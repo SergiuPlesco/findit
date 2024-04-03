@@ -2,6 +2,8 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Schema, Types, model } from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
 export type UserType = {
   _id: Types.ObjectId;
@@ -66,7 +68,7 @@ UserSchema.methods.matchPasswords = async function (password: string) {
 
 UserSchema.methods.getSignedToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET as string, {
-    expiresIn: process.env.JWT_EXPIRE,
+    expiresIn: process.env.JWT_EXPIRE as string,
   });
 };
 

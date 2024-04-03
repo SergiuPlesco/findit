@@ -109,12 +109,12 @@ const CompanyProfile = () => {
       }
 
       if (coverPreview.isUploaded) {
-        const coverImage = await handleCloudinaryCoverUpload(
-          companyInfo.coverImage
-        );
-        console.log(coverImage);
+        // const coverImage = await handleCloudinaryCoverUpload(
+        //   companyInfo.coverImage
+        // );
+        // console.log(coverImage);
 
-        formData.set("coverImage", coverImage.secure_url);
+        formData.set("coverImage", JSON.stringify(coverPreview));
         dispatch(
           updateUserCompany({
             userID: currentUser._id,

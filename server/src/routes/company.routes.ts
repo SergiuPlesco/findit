@@ -21,10 +21,10 @@ companyRouter.post(
 companyRouter.put(
   "/users/:userID/company",
   authorize,
-  upload.fields([
-    { name: "coverImage", maxCount: 1 },
-    { name: "logoImage", maxCount: 1 },
-  ]),
+  // upload.fields([
+  //   { name: "coverImage", maxCount: 1 },
+  //   { name: "logoImage", maxCount: 1 },
+  // ]),
   companyController.company_update_details
 );
 companyRouter.delete(
